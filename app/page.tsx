@@ -5,30 +5,20 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
-import {
-  Menu,
-  X,
-  ExternalLink,
-  Mail,
-  Linkedin,
-  ChevronDown,
-  Moon,
-  Sun,
-  Sparkles,
-  Zap,
-  Target,
-  Users,
-} from "lucide-react"
+import { Typewriter } from "@/components/ui/typewriter"
+import { Menu, X, Mail, Linkedin, Moon, Sun } from "lucide-react"
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("home")
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "about", "experience", "projects", "contact"]
+      const sections = ["home", "projects", "experience", "contact"]
       const scrollPosition = window.scrollY + 100
+      setIsScrolled(window.scrollY > 50)
 
       for (const section of sections) {
         const element = document.getElementById(section)
@@ -48,6 +38,26 @@ export default function Portfolio() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-fade-in")
+        }
+      })
+    }, observerOptions)
+
+    const sections = document.querySelectorAll("section")
+    sections.forEach((section) => observer.observe(section))
+
+    return () => observer.disconnect()
+  }, [])
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
@@ -62,25 +72,32 @@ export default function Portfolio() {
 
   const navItems = [
     { id: "home", label: "Home" },
-    { id: "about", label: "About" },
-    { id: "experience", label: "Experience" },
     { id: "projects", label: "Projects" },
+    { id: "experience", label: "Experience" },
     { id: "contact", label: "Contact" },
   ]
 
+  const typewriterPhrases = ["Product Management", "Website Design & Creation", "Web Application Development"]
+
   return (
-    <div className={`min-h-screen transition-all duration-500 ${isDarkMode ? "dark bg-gray-900" : "bg-gray-50"}`}>
+    <div
+      className={`min-h-screen font-inter transition-all duration-500 ${isDarkMode ? "dark bg-slate-900" : "bg-slate-50"}`}
+    >
       {/* Navigation */}
       <nav
-        className={`fixed top-0 w-full backdrop-blur-md border-b z-50 transition-all duration-300 ${
-          isDarkMode ? "bg-gray-900/80 border-gray-700" : "bg-white/80 border-gray-200"
+        className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+          isScrolled
+            ? isDarkMode
+              ? "bg-slate-900/80 backdrop-blur-md border-b border-slate-700/50"
+              : "bg-white/80 backdrop-blur-md border-b border-slate-200/50"
+            : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div
-              className={`font-bold text-xl transition-colors duration-300 ${
-                isDarkMode ? "text-white" : "text-gray-900"
+              className={`font-medium text-xl transition-colors duration-500 ${
+                isDarkMode ? "text-slate-100" : "text-slate-800"
               }`}
             >
               Ajay Nichani
@@ -94,10 +111,10 @@ export default function Portfolio() {
                   onClick={() => scrollToSection(item.id)}
                   className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
                     activeSection === item.id
-                      ? "text-cyan-500"
+                      ? "text-teal-600 dark:text-teal-400"
                       : isDarkMode
-                        ? "text-gray-300 hover:text-cyan-400"
-                        : "text-gray-700 hover:text-cyan-600"
+                        ? "text-slate-300 hover:text-teal-400"
+                        : "text-slate-600 hover:text-teal-600"
                   }`}
                 >
                   {item.label}
@@ -105,23 +122,23 @@ export default function Portfolio() {
               ))}
 
               {/* Dark Mode Toggle */}
-              <div className="flex items-center space-x-2">
-                <Sun className={`h-4 w-4 transition-colors ${isDarkMode ? "text-gray-400" : "text-yellow-500"}`} />
+              <div className="flex items-center space-x-3">
+                <Sun className={`h-4 w-4 transition-colors ${isDarkMode ? "text-slate-400" : "text-amber-500"}`} />
                 <Switch checked={isDarkMode} onCheckedChange={toggleDarkMode} />
-                <Moon className={`h-4 w-4 transition-colors ${isDarkMode ? "text-blue-400" : "text-gray-400"}`} />
+                <Moon className={`h-4 w-4 transition-colors ${isDarkMode ? "text-indigo-400" : "text-slate-400"}`} />
               </div>
             </div>
 
             {/* Mobile menu button */}
             <div className="md:hidden flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <Sun className={`h-4 w-4 transition-colors ${isDarkMode ? "text-gray-400" : "text-yellow-500"}`} />
+              <div className="flex items-center space-x-3">
+                <Sun className={`h-4 w-4 transition-colors ${isDarkMode ? "text-slate-400" : "text-amber-500"}`} />
                 <Switch checked={isDarkMode} onCheckedChange={toggleDarkMode} />
-                <Moon className={`h-4 w-4 transition-colors ${isDarkMode ? "text-blue-400" : "text-gray-400"}`} />
+                <Moon className={`h-4 w-4 transition-colors ${isDarkMode ? "text-indigo-400" : "text-slate-400"}`} />
               </div>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`transition-colors ${isDarkMode ? "text-gray-300 hover:text-cyan-400" : "text-gray-700 hover:text-cyan-600"}`}
+                className={`transition-colors ${isDarkMode ? "text-slate-300 hover:text-teal-400" : "text-slate-600 hover:text-teal-600"}`}
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -132,20 +149,20 @@ export default function Portfolio() {
           {isMenuOpen && (
             <div className="md:hidden">
               <div
-                className={`px-2 pt-2 pb-3 space-y-1 border-t transition-colors ${
-                  isDarkMode ? "bg-gray-900 border-gray-700" : "bg-white border-gray-200"
+                className={`px-4 pt-4 pb-6 space-y-3 border-t transition-colors ${
+                  isDarkMode ? "bg-slate-900/95 border-slate-700/50" : "bg-white/95 border-slate-200/50"
                 }`}
               >
                 {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`block px-3 py-2 text-base font-medium transition-colors ${
+                    className={`block px-4 py-3 text-base font-medium transition-colors ${
                       activeSection === item.id
-                        ? "text-cyan-500"
+                        ? "text-teal-600 dark:text-teal-400"
                         : isDarkMode
-                          ? "text-gray-300 hover:text-cyan-400"
-                          : "text-gray-700 hover:text-cyan-600"
+                          ? "text-slate-300 hover:text-teal-400"
+                          : "text-slate-600 hover:text-teal-600"
                     }`}
                   >
                     {item.label}
@@ -157,274 +174,202 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      {/* Header Section */}
+      {/* Hero Section */}
       <section
         id="home"
-        className={`pt-16 min-h-screen flex items-center relative overflow-hidden ${
-          isDarkMode
-            ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
-            : "bg-gradient-to-br from-white via-gray-50 to-cyan-50"
+        className={`min-h-screen flex items-center justify-center px-6 lg:px-8 transition-colors duration-500 ${
+          isDarkMode ? "bg-slate-900" : "bg-slate-50"
         }`}
       >
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div
-            className={`absolute top-20 left-10 w-72 h-72 rounded-full opacity-20 animate-pulse ${
-              isDarkMode ? "bg-cyan-500" : "bg-cyan-200"
+        <div className="text-center max-w-4xl mx-auto">
+          <h1
+            className={`text-5xl md:text-7xl font-bold mb-6 transition-colors duration-500 ${
+              isDarkMode ? "text-slate-100" : "text-slate-800"
             }`}
-          ></div>
-          <div
-            className={`absolute bottom-20 right-10 w-96 h-96 rounded-full opacity-10 animate-bounce ${
-              isDarkMode ? "bg-purple-500" : "bg-purple-200"
+          >
+            Hi, I'm{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-purple-600 dark:from-teal-400 dark:to-purple-400">
+              Ajay Nichani
+            </span>
+          </h1>
+
+          <h2
+            className={`text-2xl md:text-3xl font-medium mb-8 transition-colors duration-500 ${
+              isDarkMode ? "text-slate-300" : "text-slate-600"
             }`}
-            style={{ animationDuration: "3s" }}
-          ></div>
-          <div
-            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-5 animate-spin ${
-              isDarkMode
-                ? "bg-gradient-to-r from-cyan-500 to-purple-500"
-                : "bg-gradient-to-r from-cyan-300 to-purple-300"
-            }`}
-            style={{ animationDuration: "20s" }}
-          ></div>
-        </div>
+          >
+            Full-Stack Product Manager
+          </h2>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-          <div className="text-center">
-            <div className="animate-fade-in-up">
-              <h1
-                className={`text-5xl md:text-7xl font-bold mb-6 transition-colors duration-300 ${
-                  isDarkMode ? "text-white" : "text-gray-900"
-                }`}
-              >
-                Hi, I'm{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-purple-600 animate-pulse">
-                  Ajay Nichani
-                </span>
-              </h1>
-            </div>
+          <div className="mb-12 flex justify-center">
+            <Typewriter phrases={typewriterPhrases} />
+          </div>
 
-            <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <p
-                className={`text-xl md:text-2xl mb-12 max-w-4xl mx-auto leading-relaxed transition-colors duration-300 ${
-                  isDarkMode ? "text-gray-300" : "text-gray-600"
-                }`}
-              >
-                Product leader with over 8 years of experience managing end-to-end business performance in consumer and
-                enterprise businesses, from user acquisition and engagement to product development. Specializing in
-                digital consumer experiences with an emphasis on AI-driven solutions, data analytics, and user-centric
-                design across all stages of the product life cycle.
-              </p>
-            </div>
-
-            <div
-              className="animate-fade-in-up flex flex-col sm:flex-row gap-4 justify-center"
-              style={{ animationDelay: "0.4s" }}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              onClick={() => scrollToSection("contact")}
+              className="bg-teal-600 hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 text-white px-8 py-3 text-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-              <Button
-                onClick={() => scrollToSection("contact")}
-                className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white px-8 py-3 text-lg transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-              >
-                <Sparkles className="mr-2 h-5 w-5" />
-                Get in Touch
-              </Button>
-              <Button
-                onClick={() => scrollToSection("projects")}
-                variant="outline"
-                className={`px-8 py-3 text-lg transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl ${
-                  isDarkMode
-                    ? "border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-gray-900"
-                    : "border-cyan-600 text-cyan-600 hover:bg-cyan-50"
-                }`}
-              >
-                <Zap className="mr-2 h-5 w-5" />
-                Browse Projects
-              </Button>
-            </div>
-
-            <div className="mt-16 animate-bounce">
-              <ChevronDown
-                className={`mx-auto cursor-pointer transition-colors hover:text-cyan-500 ${
-                  isDarkMode ? "text-gray-400" : "text-gray-400"
-                }`}
-                size={32}
-                onClick={() => scrollToSection("about")}
-              />
-            </div>
+              Get in Touch
+            </Button>
+            <Button
+              onClick={() => scrollToSection("projects")}
+              variant="outline"
+              className={`px-8 py-3 text-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl ${
+                isDarkMode
+                  ? "border-slate-600 text-slate-300 hover:bg-slate-800 hover:border-teal-400"
+                  : "border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-teal-600"
+              }`}
+            >
+              View My Work
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className={`py-20 transition-colors duration-300 ${isDarkMode ? "bg-gray-800" : "bg-white"}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in-up">
+      {/* Projects Section */}
+      <section
+        id="projects"
+        className={`py-24 transition-colors duration-500 opacity-0 ${isDarkMode ? "bg-slate-800" : "bg-white"}`}
+      >
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
             <h2
-              className={`text-4xl font-bold mb-4 transition-colors duration-300 ${
-                isDarkMode ? "text-white" : "text-gray-900"
+              className={`text-4xl font-bold mb-4 transition-colors duration-500 ${
+                isDarkMode ? "text-slate-100" : "text-slate-800"
               }`}
             >
-              About Me
+              Products & Projects
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto"></div>
+            <div className="w-20 h-1 bg-gradient-to-r from-teal-600 to-purple-600 dark:from-teal-400 dark:to-purple-400 mx-auto rounded-full"></div>
           </div>
 
-          {/* My Story */}
-          <div className="mb-16 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-            <h3
-              className={`text-2xl font-bold mb-6 transition-colors duration-300 ${
-                isDarkMode ? "text-white" : "text-gray-900"
-              }`}
-            >
-              My Story
-            </h3>
-            <p
-              className={`text-lg leading-relaxed max-w-4xl transition-colors duration-300 ${
-                isDarkMode ? "text-gray-300" : "text-gray-600"
-              }`}
-            >
-              As a seasoned product leader based in San Francisco, I've spent over 8 years driving innovation and growth
-              across consumer and enterprise businesses. My journey began in the dynamic world of mobile commerce at
-              Shopkick, where I honed my skills in user acquisition, engagement, and product development. Today, I'm
-              passionate about leveraging AI-driven solutions and data analytics to create exceptional user experiences
-              that drive meaningful business outcomes.
-            </p>
-          </div>
-
-          {/* Skills */}
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* MathStack AI */}
             <Card
-              className={`border hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-fade-in-up ${
-                isDarkMode
-                  ? "border-gray-700 bg-gray-900 hover:border-cyan-500"
-                  : "border-gray-200 bg-white hover:border-cyan-300"
-              }`}
-              style={{ animationDelay: "0.3s" }}
+              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
             >
-              <CardContent className="p-6">
-                <div className="flex items-center mb-4">
-                  <Target className="text-cyan-500 mr-3" size={24} />
-                  <h4
-                    className={`text-xl font-bold transition-colors duration-300 ${
-                      isDarkMode ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    Product Management
-                  </h4>
-                </div>
+              <CardContent className="p-8">
+                <h3
+                  className={`text-2xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
+                >
+                  MathStack AI
+                </h3>
+                <p
+                  className={`mb-6 leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
+                >
+                  An AI-powered EdTech platform for mathematics learning that personalizes the educational experience
+                  using advanced machine learning algorithms.
+                </p>
                 <div className="flex flex-wrap gap-2">
-                  {[
-                    "Figma",
-                    "JIRA",
-                    "Confluence",
-                    "Monday.com",
-                    "Tableau",
-                    "Looker",
-                    "Google Analytics",
-                    "UserTesting",
-                    "Typeform",
-                    "Segment",
-                  ].map((skill) => (
-                    <Badge
-                      key={skill}
-                      variant="secondary"
-                      className={`transition-all duration-300 hover:scale-105 ${
-                        isDarkMode
-                          ? "bg-cyan-900 text-cyan-300 hover:bg-cyan-800"
-                          : "bg-cyan-50 text-cyan-700 hover:bg-cyan-100"
-                      }`}
-                    >
-                      {skill}
-                    </Badge>
-                  ))}
+                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
+                    AI/ML
+                  </Badge>
+                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
+                    EdTech
+                  </Badge>
+                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
+                    Next.js
+                  </Badge>
+                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
+                    User Accounts
+                  </Badge>
+                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
+                    Database Creation
+                  </Badge>
                 </div>
               </CardContent>
             </Card>
 
+            {/* InterRoom */}
             <Card
-              className={`border hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-fade-in-up ${
-                isDarkMode
-                  ? "border-gray-700 bg-gray-900 hover:border-purple-500"
-                  : "border-gray-200 bg-white hover:border-purple-300"
-              }`}
-              style={{ animationDelay: "0.4s" }}
+              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
             >
-              <CardContent className="p-6">
-                <div className="flex items-center mb-4">
-                  <Zap className="text-purple-500 mr-3" size={24} />
-                  <h4
-                    className={`text-xl font-bold transition-colors duration-300 ${
-                      isDarkMode ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    Technical
-                  </h4>
-                </div>
+              <CardContent className="p-8">
+                <h3
+                  className={`text-2xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
+                >
+                  InterRoom
+                </h3>
+                <p
+                  className={`mb-6 leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
+                >
+                  An HR SaaS platform featuring a comprehensive client portal and job tracker, streamlining recruitment
+                  processes for enterprise clients.
+                </p>
                 <div className="flex flex-wrap gap-2">
-                  {[
-                    "Google Cloud Platform",
-                    "SQL",
-                    "Firebase",
-                    "JavaScript",
-                    "React",
-                    "Next.js",
-                    "Node.js",
-                    "Replit",
-                    "Vercel",
-                    "Cursor.AI",
-                    "Gemini",
-                    "ChatGPT",
-                    "Claude",
-                  ].map((skill) => (
-                    <Badge
-                      key={skill}
-                      variant="secondary"
-                      className={`transition-all duration-300 hover:scale-105 ${
-                        isDarkMode
-                          ? "bg-purple-900 text-purple-300 hover:bg-purple-800"
-                          : "bg-purple-50 text-purple-700 hover:bg-purple-100"
-                      }`}
-                    >
-                      {skill}
-                    </Badge>
-                  ))}
+                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
+                    SaaS
+                  </Badge>
+                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
+                    HR Tech
+                  </Badge>
+                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
+                    React
+                  </Badge>
+                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
+                    Firebase
+                  </Badge>
                 </div>
               </CardContent>
             </Card>
 
+            {/* Behavioral Math App */}
             <Card
-              className={`border hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-fade-in-up ${
-                isDarkMode
-                  ? "border-gray-700 bg-gray-900 hover:border-green-500"
-                  : "border-gray-200 bg-white hover:border-green-300"
-              }`}
-              style={{ animationDelay: "0.5s" }}
+              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
             >
-              <CardContent className="p-6">
-                <div className="flex items-center mb-4">
-                  <Users className="text-green-500 mr-3" size={24} />
-                  <h4
-                    className={`text-xl font-bold transition-colors duration-300 ${
-                      isDarkMode ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    Soft Skills
-                  </h4>
-                </div>
+              <CardContent className="p-8">
+                <h3
+                  className={`text-2xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
+                >
+                  Behavioral Math App
+                </h3>
+                <p
+                  className={`mb-6 leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
+                >
+                  A mobile application designed to improve math skills through behavioral science principles, making
+                  learning engaging and effective.
+                </p>
                 <div className="flex flex-wrap gap-2">
-                  {["Leadership", "Communication", "Collaboration", "Problem Solving"].map((skill) => (
-                    <Badge
-                      key={skill}
-                      variant="secondary"
-                      className={`transition-all duration-300 hover:scale-105 ${
-                        isDarkMode
-                          ? "bg-green-900 text-green-300 hover:bg-green-800"
-                          : "bg-green-50 text-green-700 hover:bg-green-100"
-                      }`}
-                    >
-                      {skill}
-                    </Badge>
-                  ))}
+                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
+                    Mobile App
+                  </Badge>
+                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
+                    EdTech
+                  </Badge>
+                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
+                    Gamification
+                  </Badge>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* NFL Pick 'Em App */}
+            <Card
+              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
+            >
+              <CardContent className="p-8">
+                <h3
+                  className={`text-2xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
+                >
+                  NFL Pick 'Em App
+                </h3>
+                <p
+                  className={`mb-6 leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
+                >
+                  A web application for friends to compete in NFL weekly pick'em pools, featuring real-time scoring and
+                  social competition.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
+                    Web App
+                  </Badge>
+                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
+                    End-to-End Development
+                  </Badge>
+                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
+                    Monetization (Stripe)
+                  </Badge>
                 </div>
               </CardContent>
             </Card>
@@ -435,156 +380,137 @@ export default function Portfolio() {
       {/* Experience Section */}
       <section
         id="experience"
-        className={`py-20 transition-colors duration-300 ${isDarkMode ? "bg-gray-900" : "bg-gray-50"}`}
+        className={`py-24 transition-colors duration-500 opacity-0 ${isDarkMode ? "bg-slate-900" : "bg-slate-50"}`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in-up">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
             <h2
-              className={`text-4xl font-bold mb-4 transition-colors duration-300 ${
-                isDarkMode ? "text-white" : "text-gray-900"
+              className={`text-4xl font-bold mb-4 transition-colors duration-500 ${
+                isDarkMode ? "text-slate-100" : "text-slate-800"
               }`}
             >
               Experience
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto"></div>
+            <div className="w-20 h-1 bg-gradient-to-r from-teal-600 to-purple-600 dark:from-teal-400 dark:to-purple-400 mx-auto rounded-full"></div>
           </div>
 
-          <div className="space-y-12">
-            {/* MathStack AI */}
-            <div className="flex flex-col md:flex-row gap-8 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-              <div className="md:w-1/4">
-                <div className="text-cyan-500 font-semibold text-lg">2024 - Present</div>
-              </div>
-              <div className="md:w-3/4">
-                <Card
-                  className={`border transition-all duration-500 hover:shadow-xl transform hover:-translate-y-1 ${
-                    isDarkMode
-                      ? "border-gray-700 bg-gray-800 hover:border-cyan-500"
-                      : "border-gray-200 bg-white hover:border-cyan-300"
-                  }`}
-                >
-                  <CardContent className="p-6">
-                    <h3
-                      className={`text-2xl font-bold mb-2 transition-colors duration-300 ${
-                        isDarkMode ? "text-white" : "text-gray-900"
-                      }`}
-                    >
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              {/* Vertical dashed line */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-px border-l-2 border-dashed border-slate-300 dark:border-slate-600"></div>
+
+              <div className="space-y-12">
+                {/* MathStack AI */}
+                <div className="relative flex items-start">
+                  {/* Left side - Date */}
+                  <div className="w-1/2 pr-8 text-right">
+                    <p className={`text-lg font-medium ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
+                      2024 - Present
+                    </p>
+                  </div>
+
+                  {/* Center circle */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1">
+                    <div className="w-6 h-6 rounded-full border-2 border-dashed border-teal-500 dark:border-teal-400 bg-white dark:bg-slate-900 flex items-center justify-center">
+                      <div className="w-3 h-3 rounded-full bg-teal-500 dark:bg-teal-400"></div>
+                    </div>
+                  </div>
+
+                  {/* Right side - Job info */}
+                  <div className="w-1/2 pl-8">
+                    <h4 className={`text-xl font-semibold mb-2 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}>
                       Founder
-                    </h3>
-                    <h4 className="text-xl text-cyan-500 mb-4">MathStack AI</h4>
-                    <ul
-                      className={`space-y-2 transition-colors duration-300 ${
-                        isDarkMode ? "text-gray-300" : "text-gray-600"
-                      }`}
-                    >
+                    </h4>
+                    <h5 className="text-lg text-teal-600 dark:text-teal-400 mb-3 font-medium">MathStack AI</h5>
+                    <ul className={`space-y-2 leading-relaxed ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       <li>• Founded an AI-powered EdTech platform focused on mathematics learning</li>
                       <li>• Developed innovative AI-driven solutions for personalized learning experiences</li>
                       <li>• Built end-to-end product strategy and technical implementation</li>
                     </ul>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
+                  </div>
+                </div>
 
-            {/* InterRoom */}
-            <div className="flex flex-col md:flex-row gap-8 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <div className="md:w-1/4">
-                <div className="text-cyan-500 font-semibold text-lg">2023 - Present</div>
-              </div>
-              <div className="md:w-3/4">
-                <Card
-                  className={`border transition-all duration-500 hover:shadow-xl transform hover:-translate-y-1 ${
-                    isDarkMode
-                      ? "border-gray-700 bg-gray-800 hover:border-purple-500"
-                      : "border-gray-200 bg-white hover:border-purple-300"
-                  }`}
-                >
-                  <CardContent className="p-6">
-                    <h3
-                      className={`text-2xl font-bold mb-2 transition-colors duration-300 ${
-                        isDarkMode ? "text-white" : "text-gray-900"
-                      }`}
-                    >
+                {/* InterRoom */}
+                <div className="relative flex items-start">
+                  {/* Left side - Date */}
+                  <div className="w-1/2 pr-8 text-right">
+                    <p className={`text-lg font-medium ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
+                      2023 - Present
+                    </p>
+                  </div>
+
+                  {/* Center circle */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1">
+                    <div className="w-6 h-6 rounded-full border-2 border-dashed border-purple-500 dark:border-purple-400 bg-white dark:bg-slate-900 flex items-center justify-center">
+                      <div className="w-3 h-3 rounded-full bg-purple-500 dark:bg-purple-400"></div>
+                    </div>
+                  </div>
+
+                  {/* Right side - Job info */}
+                  <div className="w-1/2 pl-8">
+                    <h4 className={`text-xl font-semibold mb-2 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}>
                       Product Lead
-                    </h3>
-                    <h4 className="text-xl text-purple-500 mb-4">InterRoom</h4>
-                    <ul
-                      className={`space-y-2 transition-colors duration-300 ${
-                        isDarkMode ? "text-gray-300" : "text-gray-600"
-                      }`}
-                    >
+                    </h4>
+                    <h5 className="text-lg text-purple-600 dark:text-purple-400 mb-3 font-medium">InterRoom</h5>
+                    <ul className={`space-y-2 leading-relaxed ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       <li>• Leading product development for HR SaaS platform with client portal and job tracker</li>
                       <li>• Driving user-centric design and feature development</li>
                       <li>• Managing cross-functional teams to deliver enterprise solutions</li>
                     </ul>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
+                  </div>
+                </div>
 
-            {/* Nimble RX */}
-            <div className="flex flex-col md:flex-row gap-8 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-              <div className="md:w-1/4">
-                <div className="text-cyan-500 font-semibold text-lg">2022</div>
-              </div>
-              <div className="md:w-3/4">
-                <Card
-                  className={`border transition-all duration-500 hover:shadow-xl transform hover:-translate-y-1 ${
-                    isDarkMode
-                      ? "border-gray-700 bg-gray-800 hover:border-green-500"
-                      : "border-gray-200 bg-white hover:border-green-300"
-                  }`}
-                >
-                  <CardContent className="p-6">
-                    <h3
-                      className={`text-2xl font-bold mb-2 transition-colors duration-300 ${
-                        isDarkMode ? "text-white" : "text-gray-900"
-                      }`}
-                    >
+                {/* Nimble RX */}
+                <div className="relative flex items-start">
+                  {/* Left side - Date */}
+                  <div className="w-1/2 pr-8 text-right">
+                    <p className={`text-lg font-medium ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>2022</p>
+                  </div>
+
+                  {/* Center circle */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1">
+                    <div className="w-6 h-6 rounded-full border-2 border-dashed border-teal-500 dark:border-teal-400 bg-white dark:bg-slate-900 flex items-center justify-center">
+                      <div className="w-3 h-3 rounded-full bg-teal-500 dark:bg-teal-400"></div>
+                    </div>
+                  </div>
+
+                  {/* Right side - Job info */}
+                  <div className="w-1/2 pl-8">
+                    <h4 className={`text-xl font-semibold mb-2 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}>
                       Senior Product Manager
-                    </h3>
-                    <h4 className="text-xl text-green-500 mb-4">Nimble RX</h4>
-                    <ul
-                      className={`space-y-2 transition-colors duration-300 ${
-                        isDarkMode ? "text-gray-300" : "text-gray-600"
-                      }`}
-                    >
+                    </h4>
+                    <h5 className="text-lg text-teal-600 dark:text-teal-400 mb-3 font-medium">Nimble RX</h5>
+                    <ul className={`space-y-2 leading-relaxed ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       <li>• Managed product development for healthcare technology solutions</li>
                       <li>• Focused on improving patient experience and operational efficiency</li>
                       <li>• Collaborated with healthcare professionals to define product requirements</li>
                     </ul>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
+                  </div>
+                </div>
 
-            {/* Shopkick */}
-            <div className="flex flex-col md:flex-row gap-8 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-              <div className="md:w-1/4">
-                <div className="text-cyan-500 font-semibold text-lg">2017 - 2022</div>
-              </div>
-              <div className="md:w-3/4">
-                <Card
-                  className={`border transition-all duration-500 hover:shadow-xl transform hover:-translate-y-1 ${
-                    isDarkMode
-                      ? "border-gray-700 bg-gray-800 hover:border-orange-500"
-                      : "border-gray-200 bg-white hover:border-orange-300"
-                  }`}
-                >
-                  <CardContent className="p-6">
-                    <h3
-                      className={`text-2xl font-bold mb-2 transition-colors duration-300 ${
-                        isDarkMode ? "text-white" : "text-gray-900"
-                      }`}
-                    >
+                {/* Shopkick */}
+                <div className="relative flex items-start">
+                  {/* Left side - Date */}
+                  <div className="w-1/2 pr-8 text-right">
+                    <p className={`text-lg font-medium ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
+                      2017 - 2022
+                    </p>
+                  </div>
+
+                  {/* Center circle */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1">
+                    <div className="w-6 h-6 rounded-full border-2 border-dashed border-purple-500 dark:border-purple-400 bg-white dark:bg-slate-900 flex items-center justify-center">
+                      <div className="w-3 h-3 rounded-full bg-purple-500 dark:bg-purple-400"></div>
+                    </div>
+                  </div>
+
+                  {/* Right side - Job info */}
+                  <div className="w-1/2 pl-8">
+                    <h4 className={`text-xl font-semibold mb-2 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}>
                       Senior Product Manager / Product Manager
-                    </h3>
-                    <h4 className="text-xl text-orange-500 mb-4">Shopkick</h4>
-                    <ul
-                      className={`space-y-2 transition-colors duration-300 ${
-                        isDarkMode ? "text-gray-300" : "text-gray-600"
-                      }`}
-                    >
+                    </h4>
+                    <h5 className="text-lg text-purple-600 dark:text-purple-400 mb-3 font-medium">Shopkick</h5>
+                    <ul className={`space-y-2 leading-relaxed ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       <li>
                         • Led development of Digital Receipts product line, increasing purchase conversion by 30% YoY
                       </li>
@@ -593,191 +519,10 @@ export default function Portfolio() {
                       <li>• Drove user acquisition and engagement strategies for mobile commerce platform</li>
                       <li>• Collaborated with engineering, design, and business teams to deliver impactful features</li>
                     </ul>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section
-        id="projects"
-        className={`py-20 transition-colors duration-300 ${isDarkMode ? "bg-gray-800" : "bg-white"}`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in-up">
-            <h2
-              className={`text-4xl font-bold mb-4 transition-colors duration-300 ${
-                isDarkMode ? "text-white" : "text-gray-900"
-              }`}
-            >
-              Featured Projects
-            </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto"></div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card
-              className={`border hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group animate-fade-in-up ${
-                isDarkMode
-                  ? "border-gray-700 bg-gray-900 hover:border-cyan-500"
-                  : "border-gray-200 bg-white hover:border-cyan-300"
-              }`}
-              style={{ animationDelay: "0.1s" }}
-            >
-              <CardContent className="p-8">
-                <div className="flex items-center justify-between mb-4">
-                  <h3
-                    className={`text-2xl font-bold transition-colors duration-300 ${
-                      isDarkMode ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    MathStack AI
-                  </h3>
-                  <ExternalLink
-                    className="text-cyan-500 group-hover:scale-110 transition-transform duration-300"
-                    size={20}
-                  />
-                </div>
-                <p className={`mb-4 transition-colors duration-300 ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
-                  An AI-powered EdTech platform for mathematics learning that personalizes the educational experience
-                  using advanced machine learning algorithms.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:scale-105 transition-transform">
-                    AI/ML
-                  </Badge>
-                  <Badge className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:scale-105 transition-transform">
-                    EdTech
-                  </Badge>
-                  <Badge className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:scale-105 transition-transform">
-                    Product Strategy
-                  </Badge>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card
-              className={`border hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group animate-fade-in-up ${
-                isDarkMode
-                  ? "border-gray-700 bg-gray-900 hover:border-purple-500"
-                  : "border-gray-200 bg-white hover:border-purple-300"
-              }`}
-              style={{ animationDelay: "0.2s" }}
-            >
-              <CardContent className="p-8">
-                <div className="flex items-center justify-between mb-4">
-                  <h3
-                    className={`text-2xl font-bold transition-colors duration-300 ${
-                      isDarkMode ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    InterRoom
-                  </h3>
-                  <ExternalLink
-                    className="text-purple-500 group-hover:scale-110 transition-transform duration-300"
-                    size={20}
-                  />
-                </div>
-                <p className={`mb-4 transition-colors duration-300 ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
-                  An HR SaaS platform featuring a comprehensive client portal and job tracker, streamlining recruitment
-                  processes for enterprise clients.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:scale-105 transition-transform">
-                    SaaS
-                  </Badge>
-                  <Badge className="bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:scale-105 transition-transform">
-                    HR Tech
-                  </Badge>
-                  <Badge className="bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:scale-105 transition-transform">
-                    Enterprise
-                  </Badge>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card
-              className={`border hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group animate-fade-in-up ${
-                isDarkMode
-                  ? "border-gray-700 bg-gray-900 hover:border-green-500"
-                  : "border-gray-200 bg-white hover:border-green-300"
-              }`}
-              style={{ animationDelay: "0.3s" }}
-            >
-              <CardContent className="p-8">
-                <div className="flex items-center justify-between mb-4">
-                  <h3
-                    className={`text-2xl font-bold transition-colors duration-300 ${
-                      isDarkMode ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    Digital Receipts
-                  </h3>
-                  <ExternalLink
-                    className="text-green-500 group-hover:scale-110 transition-transform duration-300"
-                    size={20}
-                  />
-                </div>
-                <p className={`mb-4 transition-colors duration-300 ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
-                  Revolutionary digital receipt system at Shopkick that increased purchase conversion by 30%
-                  year-over-year through seamless user experience.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-gradient-to-r from-green-500 to-teal-600 text-white hover:scale-105 transition-transform">
-                    Mobile Commerce
-                  </Badge>
-                  <Badge className="bg-gradient-to-r from-green-500 to-teal-600 text-white hover:scale-105 transition-transform">
-                    Conversion Optimization
-                  </Badge>
-                  <Badge className="bg-gradient-to-r from-green-500 to-teal-600 text-white hover:scale-105 transition-transform">
-                    UX Design
-                  </Badge>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card
-              className={`border hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group animate-fade-in-up ${
-                isDarkMode
-                  ? "border-gray-700 bg-gray-900 hover:border-orange-500"
-                  : "border-gray-200 bg-white hover:border-orange-300"
-              }`}
-              style={{ animationDelay: "0.4s" }}
-            >
-              <CardContent className="p-8">
-                <div className="flex items-center justify-between mb-4">
-                  <h3
-                    className={`text-2xl font-bold transition-colors duration-300 ${
-                      isDarkMode ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    Targeted Video Advertising
-                  </h3>
-                  <ExternalLink
-                    className="text-orange-500 group-hover:scale-110 transition-transform duration-300"
-                    size={20}
-                  />
-                </div>
-                <p className={`mb-4 transition-colors duration-300 ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
-                  Built a sophisticated video advertising platform at Shopkick that generated $10M in annual recurring
-                  revenue through precise targeting and engagement.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-gradient-to-r from-orange-500 to-red-600 text-white hover:scale-105 transition-transform">
-                    AdTech
-                  </Badge>
-                  <Badge className="bg-gradient-to-r from-orange-500 to-red-600 text-white hover:scale-105 transition-transform">
-                    Video Platform
-                  </Badge>
-                  <Badge className="bg-gradient-to-r from-orange-500 to-red-600 text-white hover:scale-105 transition-transform">
-                    Revenue Growth
-                  </Badge>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
@@ -785,64 +530,53 @@ export default function Portfolio() {
       {/* Contact Section */}
       <section
         id="contact"
-        className={`py-20 relative overflow-hidden ${
+        className={`py-24 relative overflow-hidden opacity-0 ${
           isDarkMode
-            ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
-            : "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
+            ? "bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800"
+            : "bg-gradient-to-br from-slate-700 via-slate-600 to-slate-700"
         }`}
       >
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-10 right-10 w-64 h-64 bg-cyan-500 rounded-full opacity-10 animate-pulse"></div>
-          <div
-            className="absolute bottom-10 left-10 w-80 h-80 bg-purple-500 rounded-full opacity-10 animate-bounce"
-            style={{ animationDuration: "3s" }}
-          ></div>
-        </div>
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 text-center relative z-10">
+          <h2 className="text-4xl font-bold text-white mb-4">Get in Touch</h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-teal-400 to-purple-400 mx-auto mb-8 rounded-full"></div>
+          <p className="text-xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+            Ready to collaborate on your next product challenge? Let's connect and explore how we can create exceptional
+            user experiences together.
+          </p>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="animate-fade-in-up">
-            <h2 className="text-4xl font-bold text-white mb-4">Get in Touch</h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mb-8"></div>
-            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
-              Ready to collaborate on your next product challenge? Let's connect and explore how we can create
-              exceptional user experiences together.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Button
-                className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white px-8 py-3 text-lg flex items-center gap-2 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-                onClick={() => window.open("mailto:ajay@example.com", "_blank")}
-              >
-                <Mail size={20} />
-                Email Me
-              </Button>
-              <Button
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 text-lg flex items-center gap-2 bg-transparent transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-                onClick={() => window.open("https://linkedin.com/in/ajaynichani", "_blank")}
-              >
-                <Linkedin size={20} />
-                LinkedIn
-              </Button>
-            </div>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <Button
+              className="bg-teal-600 hover:bg-teal-700 text-white px-10 py-4 text-lg font-medium flex items-center gap-3 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              onClick={() => window.open("mailto:ajay@example.com", "_blank")}
+            >
+              <Mail size={20} />
+              Email Me
+            </Button>
+            <Button
+              variant="outline"
+              className="border-slate-400 text-slate-300 hover:bg-slate-700 hover:border-teal-400 px-10 py-4 text-lg font-medium flex items-center gap-3 bg-transparent transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              onClick={() => window.open("https://linkedin.com/in/ajaynichani", "_blank")}
+            >
+              <Linkedin size={20} />
+              LinkedIn
+            </Button>
           </div>
         </div>
       </section>
 
       {/* Footer */}
       <footer
-        className={`border-t py-8 transition-colors duration-300 ${
-          isDarkMode ? "bg-gray-900 border-gray-800" : "bg-gray-900 border-gray-800"
+        className={`border-t py-8 transition-colors duration-500 ${
+          isDarkMode ? "bg-slate-900 border-slate-800" : "bg-slate-800 border-slate-700"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-gray-400">© 2025 Ajay Nichani. All Rights Reserved.</p>
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 text-center">
+          <p className="text-slate-400">© 2025 Ajay Nichani. All Rights Reserved.</p>
         </div>
       </footer>
 
       <style jsx>{`
-        @keyframes fade-in-up {
+        @keyframes fade-in {
           from {
             opacity: 0;
             transform: translateY(30px);
@@ -853,9 +587,8 @@ export default function Portfolio() {
           }
         }
         
-        .animate-fade-in-up {
-          animation: fade-in-up 0.8s ease-out forwards;
-          opacity: 0;
+        .animate-fade-in {
+          animation: fade-in 0.8s ease-out forwards;
         }
       `}</style>
     </div>
