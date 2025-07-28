@@ -16,7 +16,7 @@ export default function Portfolio() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "projects", "experience", "contact"]
+      const sections = ["home", "projects", "process", "experience", "contact"]
       const scrollPosition = window.scrollY + 100
       setIsScrolled(window.scrollY > 50)
 
@@ -73,6 +73,7 @@ export default function Portfolio() {
   const navItems = [
     { id: "home", label: "Home" },
     { id: "projects", label: "Projects" },
+    { id: "process", label: "My Process" },
     { id: "experience", label: "Experience" },
     { id: "contact", label: "Contact" },
   ]
@@ -193,14 +194,6 @@ export default function Portfolio() {
             </span>
           </h1>
 
-          <h2
-            className={`text-2xl md:text-3xl font-medium mb-8 transition-colors duration-500 ${
-              isDarkMode ? "text-slate-300" : "text-slate-600"
-            }`}
-          >
-            Full-Stack Product Manager
-          </h2>
-
           <div className="mb-12 flex justify-center">
             <Typewriter phrases={typewriterPhrases} />
           </div>
@@ -247,7 +240,8 @@ export default function Portfolio() {
           <div className="grid md:grid-cols-2 gap-8">
             {/* MathStack AI */}
             <Card
-              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
+              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group cursor-pointer ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
+              onClick={() => window.open("https://mathstackai.app", "_blank")}
             >
               <CardContent className="p-8">
                 <h3
@@ -283,7 +277,8 @@ export default function Portfolio() {
 
             {/* InterRoom */}
             <Card
-              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
+              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group cursor-pointer ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
+              onClick={() => window.open("https://interroom.me", "_blank")}
             >
               <CardContent className="p-8">
                 <h3
@@ -373,6 +368,104 @@ export default function Portfolio() {
                 </div>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* My Process Section */}
+      <section
+        id="process"
+        className={`py-24 transition-colors duration-500 opacity-0 ${isDarkMode ? "bg-slate-900" : "bg-white"}`}
+      >
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2
+              className={`text-4xl font-bold mb-4 transition-colors duration-500 ${
+                isDarkMode ? "text-slate-100" : "text-slate-800"
+              }`}
+            >
+              My Process
+            </h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-teal-600 to-purple-600 dark:from-teal-400 dark:to-purple-400 mx-auto rounded-full"></div>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Consultation Call */}
+            <div className="text-center group">
+              <div
+                className={`w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300 group-hover:scale-110 ${isDarkMode ? "bg-teal-900/50 text-teal-300" : "bg-teal-100 text-teal-700"}`}
+              >
+                1
+              </div>
+              <h3
+                className={`text-xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
+              >
+                Consultation Call
+              </h3>
+              <p
+                className={`leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
+              >
+                We start with a detailed discussion about your vision, goals, and requirements to understand exactly
+                what you need.
+              </p>
+            </div>
+
+            {/* Initial Prototype */}
+            <div className="text-center group">
+              <div
+                className={`w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300 group-hover:scale-110 ${isDarkMode ? "bg-purple-900/50 text-purple-300" : "bg-purple-100 text-purple-700"}`}
+              >
+                2
+              </div>
+              <h3
+                className={`text-xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
+              >
+                Initial Prototype
+              </h3>
+              <p
+                className={`leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
+              >
+                I create a working prototype to validate concepts and gather feedback before moving to full development.
+              </p>
+            </div>
+
+            {/* Production Ready */}
+            <div className="text-center group">
+              <div
+                className={`w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300 group-hover:scale-110 ${isDarkMode ? "bg-teal-900/50 text-teal-300" : "bg-teal-100 text-teal-700"}`}
+              >
+                3
+              </div>
+              <h3
+                className={`text-xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
+              >
+                Production Ready
+              </h3>
+              <p
+                className={`leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
+              >
+                The final product is built with scalability, security, and performance in mind, ready for real users.
+              </p>
+            </div>
+
+            {/* Maintain */}
+            <div className="text-center group">
+              <div
+                className={`w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300 group-hover:scale-110 ${isDarkMode ? "bg-purple-900/50 text-purple-300" : "bg-purple-100 text-purple-700"}`}
+              >
+                4
+              </div>
+              <h3
+                className={`text-xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
+              >
+                Maintain
+              </h3>
+              <p
+                className={`leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
+              >
+                Ongoing support, updates, and improvements to ensure your product continues to meet evolving needs.
+              </p>
+            </div>
           </div>
         </div>
       </section>
