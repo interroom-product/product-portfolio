@@ -6,7 +6,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
 import { Typewriter } from "@/components/ui/typewriter"
-import { Menu, X, Mail, Linkedin, Moon, Sun, ArrowRight, Check } from "lucide-react"
+import { Menu, X, Mail, Moon, Sun, ArrowRight, Check, Users, Zap } from "lucide-react"
+import Image from "next/image"
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -102,14 +103,6 @@ export default function Portfolio() {
       >
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div
-              className={`font-medium text-xl transition-colors duration-500 ${
-                isDarkMode ? "text-slate-100" : "text-slate-800"
-              }`}
-            >
-              Ajay Nichani
-            </div>
-
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
@@ -189,13 +182,25 @@ export default function Portfolio() {
         }`}
       >
         <div className="text-center max-w-4xl mx-auto">
-          <h1
-            className={`text-5xl md:text-7xl font-bold mb-6 transition-colors duration-500 ${
-              isDarkMode ? "text-slate-100" : "text-slate-900"
-            }`}
-          >
-            Hi, I'm <span className="text-slate-900 dark:text-slate-100">Ajay Nichani</span>
-          </h1>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-6">
+            <div className="relative order-2 md:order-1">
+              <Image
+                src="/memoji.png"
+                alt="Ajay Nichani Memoji"
+                width={120}
+                height={120}
+                className="rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
+                priority
+              />
+            </div>
+            <h1
+              className={`text-4xl md:text-6xl lg:text-7xl font-bold transition-colors duration-500 order-1 md:order-2 ${
+                isDarkMode ? "text-slate-100" : "text-slate-900"
+              }`}
+            >
+              Hi, I'm <span className="text-slate-900 dark:text-slate-100">Ajay Nichani</span>
+            </h1>
+          </div>
 
           <div className="mb-12 flex justify-center">
             <Typewriter phrases={typewriterPhrases} />
@@ -247,11 +252,16 @@ export default function Portfolio() {
               onClick={() => window.open("https://mathstackai.app", "_blank")}
             >
               <CardContent className="p-8">
-                <h3
-                  className={`text-2xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
-                >
-                  MathStack AI
-                </h3>
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <div className="text-white text-2xl font-bold">∑</div>
+                  </div>
+                  <h3
+                    className={`text-2xl font-semibold transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
+                  >
+                    MathStack AI
+                  </h3>
+                </div>
                 <p
                   className={`mb-6 leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
                 >
@@ -260,19 +270,19 @@ export default function Portfolio() {
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
-                    AI/ML
+                    Generative AI
                   </Badge>
                   <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
-                    EdTech
+                    SaaS
                   </Badge>
                   <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
-                    Next.js
+                    Stripe Integration
                   </Badge>
                   <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
-                    User Accounts
+                    Authentication
                   </Badge>
                   <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
-                    Database Creation
+                    Account Sign Up
                   </Badge>
                 </div>
               </CardContent>
@@ -284,11 +294,16 @@ export default function Portfolio() {
               onClick={() => window.open("https://interroom.me", "_blank")}
             >
               <CardContent className="p-8">
-                <h3
-                  className={`text-2xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
-                >
-                  InterRoom
-                </h3>
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <Users className="w-8 h-8 text-white" />
+                  </div>
+                  <h3
+                    className={`text-2xl font-semibold transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
+                  >
+                    InterRoom
+                  </h3>
+                </div>
                 <p
                   className={`mb-6 leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
                 >
@@ -306,37 +321,52 @@ export default function Portfolio() {
                     React
                   </Badge>
                   <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
-                    Firebase
+                    Multi-Page Website
+                  </Badge>
+                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
+                    Interactive Tools
+                  </Badge>
+                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
+                    Custom Forms
                   </Badge>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Behavioral Math App */}
+            {/* Interview Ace */}
             <Card
-              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
+              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group cursor-pointer ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
+              onClick={() => window.open("https://v0-behavioral-interview-app-nine.vercel.app/", "_blank")}
             >
               <CardContent className="p-8">
-                <h3
-                  className={`text-2xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
-                >
-                  Behavioral Math App
-                </h3>
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <Zap className="w-8 h-8 text-white" />
+                  </div>
+                  <h3
+                    className={`text-2xl font-semibold transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
+                  >
+                    Interview Ace
+                  </h3>
+                </div>
                 <p
                   className={`mb-6 leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
                 >
-                  A mobile application designed to improve math skills through behavioral science principles, making
-                  learning engaging and effective.
+                  A web application designed to improve interview skills through behavioral science principles, making
+                  practicing engaging and effective.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
-                    Mobile App
-                  </Badge>
-                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
-                    EdTech
-                  </Badge>
-                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
                     Gamification
+                  </Badge>
+                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
+                    Web App
+                  </Badge>
+                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
+                    React
+                  </Badge>
+                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
+                    Multi-Page Website
                   </Badge>
                 </div>
               </CardContent>
@@ -344,14 +374,26 @@ export default function Portfolio() {
 
             {/* NFL Pick 'Em App */}
             <Card
-              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
+              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group cursor-pointer ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
+              onClick={() => window.open("https://nflpickens.lovable.app/", "_blank")}
             >
               <CardContent className="p-8">
-                <h3
-                  className={`text-2xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
-                >
-                  NFL Pick 'Em App
-                </h3>
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                      <div className="w-6 h-6 bg-amber-600 rounded-full relative">
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="w-1 h-4 bg-white rounded-full"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <h3
+                    className={`text-2xl font-semibold transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
+                  >
+                    NFL Pick 'Em App
+                  </h3>
+                </div>
                 <p
                   className={`mb-6 leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
                 >
@@ -366,7 +408,10 @@ export default function Portfolio() {
                     End-to-End Development
                   </Badge>
                   <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
-                    Monetization (Stripe)
+                    Futuristic Design
+                  </Badge>
+                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
+                    Loveable
                   </Badge>
                 </div>
               </CardContent>
@@ -508,9 +553,9 @@ export default function Portfolio() {
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {/* Basic Package */}
             <Card
-              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
+              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"} flex flex-col`}
             >
-              <CardContent className="p-8">
+              <CardContent className="p-8 flex flex-col flex-grow">
                 <div className="text-center mb-6">
                   <h3
                     className={`text-2xl font-semibold mb-2 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
@@ -530,7 +575,7 @@ export default function Portfolio() {
                 >
                   For personal brands or simple landing pages.
                 </p>
-                <div className="space-y-3 mb-8">
+                <div className="space-y-3 mb-8 flex-grow">
                   <div className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
@@ -558,7 +603,7 @@ export default function Portfolio() {
                   <div className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      1 round of revisions
+                      Limited revisions
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -570,7 +615,7 @@ export default function Portfolio() {
                 </div>
                 <Button
                   onClick={() => scrollToSection("contact")}
-                  className="w-full bg-teal-600 hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 text-white"
+                  className="w-full bg-teal-600 hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 text-white mt-auto"
                 >
                   Get Started
                 </Button>
@@ -579,12 +624,12 @@ export default function Portfolio() {
 
             {/* Plus Package */}
             <Card
-              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"} relative`}
+              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"} relative flex flex-col`}
             >
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                 <Badge className="bg-purple-600 text-white px-4 py-1">Most Popular</Badge>
               </div>
-              <CardContent className="p-8">
+              <CardContent className="p-8 flex flex-col flex-grow">
                 <div className="text-center mb-6">
                   <h3
                     className={`text-2xl font-semibold mb-2 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
@@ -604,7 +649,7 @@ export default function Portfolio() {
                 >
                   For small businesses needing a clean, professional web presence.
                 </p>
-                <div className="space-y-3 mb-8">
+                <div className="space-y-3 mb-8 flex-grow">
                   <div className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
@@ -630,7 +675,7 @@ export default function Portfolio() {
                   <div className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      2 rounds of revisions
+                      Limited (but way more) revisions
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -642,7 +687,7 @@ export default function Portfolio() {
                 </div>
                 <Button
                   onClick={() => scrollToSection("contact")}
-                  className="w-full bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 text-white"
+                  className="w-full bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 text-white mt-auto"
                 >
                   Get Started
                 </Button>
@@ -651,9 +696,9 @@ export default function Portfolio() {
 
             {/* Premium Package */}
             <Card
-              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
+              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"} flex flex-col`}
             >
-              <CardContent className="p-8">
+              <CardContent className="p-8 flex flex-col flex-grow">
                 <div className="text-center mb-6">
                   <h3
                     className={`text-2xl font-semibold mb-2 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
@@ -673,7 +718,7 @@ export default function Portfolio() {
                 >
                   For growing businesses needing custom features.
                 </p>
-                <div className="space-y-3 mb-8">
+                <div className="space-y-3 mb-8 flex-grow">
                   <div className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
@@ -715,7 +760,7 @@ export default function Portfolio() {
                   <div className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      3 rounds of revisions
+                      Unlimited revisions
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -727,7 +772,7 @@ export default function Portfolio() {
                 </div>
                 <Button
                   onClick={() => scrollToSection("contact")}
-                  className="w-full bg-teal-600 hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 text-white"
+                  className="w-full bg-teal-600 hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 text-white mt-auto"
                 >
                   Get Started
                 </Button>
@@ -951,21 +996,13 @@ export default function Portfolio() {
             user experiences together.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <div className="flex justify-center">
             <Button
               className="bg-teal-600 hover:bg-teal-700 text-white px-10 py-4 text-lg font-medium flex items-center gap-3 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-              onClick={() => window.open("mailto:ajay@example.com", "_blank")}
+              onClick={() => window.open("mailto:ajay_work@icloud.com", "_blank")}
             >
               <Mail size={20} />
               Email Me
-            </Button>
-            <Button
-              variant="outline"
-              className="border-slate-400 text-slate-300 hover:bg-slate-700 hover:border-teal-400 px-10 py-4 text-lg font-medium flex items-center gap-3 bg-transparent transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-              onClick={() => window.open("https://linkedin.com/in/ajaynichani", "_blank")}
-            >
-              <Linkedin size={20} />
-              LinkedIn
             </Button>
           </div>
         </div>
