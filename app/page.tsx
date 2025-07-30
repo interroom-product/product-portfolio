@@ -397,7 +397,7 @@ export default function Portfolio() {
             <div className="text-center group">
               <div className="relative mb-6">
                 <div
-                  className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300 group-hover:scale-110 shadow-lg ${isDarkMode ? "bg-teal-600 text-white" : "bg-teal-100 text-teal-700"}`}
+                  className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300 group-hover:scale-110 shadow-lg ${isDarkMode ? "bg-teal-600 text-white" : "bg-teal-100 text-teal-700 border-2 border-teal-200"}`}
                 >
                   1
                 </div>
@@ -419,7 +419,7 @@ export default function Portfolio() {
             <div className="text-center group">
               <div className="relative mb-6">
                 <div
-                  className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300 group-hover:scale-110 shadow-lg ${isDarkMode ? "bg-purple-600 text-white" : "bg-purple-100 text-purple-700"}`}
+                  className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300 group-hover:scale-110 shadow-lg ${isDarkMode ? "bg-purple-600 text-white" : "bg-purple-100 text-purple-700 border-2 border-purple-200"}`}
                 >
                   2
                 </div>
@@ -440,7 +440,7 @@ export default function Portfolio() {
             <div className="text-center group">
               <div className="relative mb-6">
                 <div
-                  className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300 group-hover:scale-110 shadow-lg ${isDarkMode ? "bg-teal-600 text-white" : "bg-teal-100 text-teal-700"}`}
+                  className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300 group-hover:scale-110 shadow-lg ${isDarkMode ? "bg-teal-600 text-white" : "bg-teal-100 text-teal-700 border-2 border-teal-200"}`}
                 >
                   3
                 </div>
@@ -461,7 +461,7 @@ export default function Portfolio() {
             <div className="text-center group">
               <div className="relative mb-6">
                 <div
-                  className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300 group-hover:scale-110 shadow-lg ${isDarkMode ? "bg-purple-600 text-white" : "bg-purple-100 text-purple-700"}`}
+                  className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300 group-hover:scale-110 shadow-lg ${isDarkMode ? "bg-purple-600 text-white" : "bg-purple-100 text-purple-700 border-2 border-purple-200"}`}
                 >
                   4
                 </div>
@@ -522,7 +522,7 @@ export default function Portfolio() {
                   >
                     Single Static Page
                   </p>
-                  <div className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-2">$500–$800</div>
+                  <div className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-2">$375 – $750</div>
                   <p className={`text-sm ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>~1 week timeline</p>
                 </div>
                 <p
@@ -532,37 +532,37 @@ export default function Portfolio() {
                 </p>
                 <div className="space-y-3 mb-8">
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       1 responsive, mobile-optimized static landing page
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       Google Analytics setup
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       Basic SEO setup
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       Simple contact form
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       1 round of revisions
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       Deployed to client's hosting/domain
                     </span>
@@ -596,7 +596,7 @@ export default function Portfolio() {
                   >
                     Multi-Page Website (No Integrations)
                   </p>
-                  <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">$1,500–$2,500</div>
+                  <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">$750 – $1,875</div>
                   <p className={`text-sm ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>~1–3 weeks timeline</p>
                 </div>
                 <p
@@ -606,35 +606,35 @@ export default function Portfolio() {
                 </p>
                 <div className="space-y-3 mb-8">
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       3–5 responsive, mobile-optimized pages
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       Google Analytics setup
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       Basic SEO setup
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>Optional CMS</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       2 rounds of revisions
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       Deployed to client's hosting/domain
                     </span>
@@ -665,7 +665,7 @@ export default function Portfolio() {
                   >
                     Multi-Page Website with Integrations
                   </p>
-                  <div className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-2">$3,500–$6,000</div>
+                  <div className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-2">Starting at $1,875</div>
                   <p className={`text-sm ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>~2–4 weeks timeline</p>
                 </div>
                 <p
@@ -675,51 +675,51 @@ export default function Portfolio() {
                 </p>
                 <div className="space-y-3 mb-8">
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       5–10 responsive, mobile-optimized pages
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       Stripe payment or booking system integration
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       Google Analytics setup with event tracking
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>Advanced SEO</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>CMS setup</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       Custom forms/email automations
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       Performance optimization
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       3 rounds of revisions
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
                       Deployed to client's hosting/domain
                     </span>
@@ -779,9 +779,12 @@ export default function Portfolio() {
                 }`}
               >
                 <h4 className={`font-semibold mb-2 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}>
-                  Advanced Analytics Dashboards
+                  Custom Integrations
                 </h4>
-                <p className="text-purple-600 dark:text-purple-400 font-bold">$200–$400</p>
+                <p className="text-purple-600 dark:text-purple-400 font-bold">Custom Pricing</p>
+                <p className={`text-xs mt-1 ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>
+                  Shopify, Stripe, etc.
+                </p>
               </div>
             </div>
           </div>
