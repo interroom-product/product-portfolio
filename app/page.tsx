@@ -6,8 +6,22 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
 import { Typewriter } from "@/components/ui/typewriter"
-import { Menu, X, Mail, Moon, Sun, ArrowRight, Check, Users, Zap } from "lucide-react"
-import Image from "next/image"
+import {
+  Menu,
+  X,
+  Mail,
+  Linkedin,
+  Moon,
+  Sun,
+  Calculator,
+  BarChart3,
+  Briefcase,
+  Users,
+  Pill,
+  Cross,
+  Smartphone,
+  DollarSign,
+} from "lucide-react"
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -17,7 +31,7 @@ export default function Portfolio() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "projects", "process", "pricing", "experience", "contact"]
+      const sections = ["home", "projects", "experience", "contact"]
       const scrollPosition = window.scrollY + 100
       setIsScrolled(window.scrollY > 50)
 
@@ -69,40 +83,43 @@ export default function Portfolio() {
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode)
-    if (isDarkMode) {
-      document.documentElement.classList.remove("dark")
-    } else {
-      document.documentElement.classList.add("dark")
-    }
   }
 
   const navItems = [
     { id: "home", label: "Home" },
     { id: "projects", label: "Projects" },
-    { id: "process", label: "My Process" },
-    { id: "pricing", label: "Pricing" },
     { id: "experience", label: "Experience" },
     { id: "contact", label: "Contact" },
   ]
 
-  const typewriterPhrases = ["Product Management", "Website Design & Creation", "Web Application Development"]
+  const typewriterPhrases = ["Product Management", "Product Strategy", "Vibe-Coding", "Roadmap Creation & Execution"]
 
   return (
     <div
-      className={`min-h-screen font-inter transition-all duration-500 ${isDarkMode ? "dark bg-slate-900" : "bg-slate-50"}`}
+      className={`min-h-screen font-inter transition-all duration-500 ${isDarkMode ? "dark bg-background" : "bg-background"}`}
     >
       {/* Navigation */}
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-500 ${
           isScrolled
             ? isDarkMode
-              ? "bg-slate-900/80 backdrop-blur-md border-b border-slate-700/50"
-              : "bg-white/80 backdrop-blur-md border-b border-slate-200/50"
+              ? "bg-background/80 backdrop-blur-md border-b border-border/50"
+              : "bg-background/80 backdrop-blur-md border-b border-border/50"
             : "bg-transparent"
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
+            {/* Added Memoji image to header navigation */}
+            <div
+              className={`font-medium text-xl transition-colors duration-500 flex items-center gap-3 ${
+                isDarkMode ? "text-foreground" : "text-foreground"
+              }`}
+            >
+              <img src="/memoji.png" alt="Ajay Nichani Memoji" className="w-10 h-10 rounded-full" />
+              Ajay Nichani
+            </div>
+
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
@@ -110,11 +127,7 @@ export default function Portfolio() {
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
                   className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
-                    activeSection === item.id
-                      ? "text-teal-600 dark:text-teal-400"
-                      : isDarkMode
-                        ? "text-slate-300 hover:text-teal-400"
-                        : "text-slate-600 hover:text-teal-600"
+                    activeSection === item.id ? "text-primary" : "text-muted-foreground hover:text-primary"
                   }`}
                 >
                   {item.label}
@@ -123,22 +136,30 @@ export default function Portfolio() {
 
               {/* Dark Mode Toggle */}
               <div className="flex items-center space-x-3">
-                <Sun className={`h-4 w-4 transition-colors ${isDarkMode ? "text-slate-400" : "text-amber-500"}`} />
+                <Sun
+                  className={`h-4 w-4 transition-colors ${isDarkMode ? "text-muted-foreground" : "text-amber-500"}`}
+                />
                 <Switch checked={isDarkMode} onCheckedChange={toggleDarkMode} />
-                <Moon className={`h-4 w-4 transition-colors ${isDarkMode ? "text-indigo-400" : "text-slate-400"}`} />
+                <Moon
+                  className={`h-4 w-4 transition-colors ${isDarkMode ? "text-primary" : "text-muted-foreground"}`}
+                />
               </div>
             </div>
 
             {/* Mobile menu button */}
             <div className="md:hidden flex items-center space-x-4">
               <div className="flex items-center space-x-3">
-                <Sun className={`h-4 w-4 transition-colors ${isDarkMode ? "text-slate-400" : "text-amber-500"}`} />
+                <Sun
+                  className={`h-4 w-4 transition-colors ${isDarkMode ? "text-muted-foreground" : "text-amber-500"}`}
+                />
                 <Switch checked={isDarkMode} onCheckedChange={toggleDarkMode} />
-                <Moon className={`h-4 w-4 transition-colors ${isDarkMode ? "text-indigo-400" : "text-slate-400"}`} />
+                <Moon
+                  className={`h-4 w-4 transition-colors ${isDarkMode ? "text-primary" : "text-muted-foreground"}`}
+                />
               </div>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`transition-colors ${isDarkMode ? "text-slate-300 hover:text-teal-400" : "text-slate-600 hover:text-teal-600"}`}
+                className="text-muted-foreground hover:text-primary transition-colors"
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -148,21 +169,13 @@ export default function Portfolio() {
           {/* Mobile Navigation */}
           {isMenuOpen && (
             <div className="md:hidden">
-              <div
-                className={`px-4 pt-4 pb-6 space-y-3 border-t transition-colors ${
-                  isDarkMode ? "bg-slate-900/95 border-slate-700/50" : "bg-white/95 border-slate-200/50"
-                }`}
-              >
+              <div className="px-4 pt-4 pb-6 space-y-3 border-t bg-background/95 border-border/50">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
                     className={`block px-4 py-3 text-base font-medium transition-colors ${
-                      activeSection === item.id
-                        ? "text-teal-600 dark:text-teal-400"
-                        : isDarkMode
-                          ? "text-slate-300 hover:text-teal-400"
-                          : "text-slate-600 hover:text-teal-600"
+                      activeSection === item.id ? "text-primary" : "text-muted-foreground hover:text-primary"
                     }`}
                   >
                     {item.label}
@@ -177,30 +190,17 @@ export default function Portfolio() {
       {/* Hero Section */}
       <section
         id="home"
-        className={`min-h-screen flex items-center justify-center px-6 lg:px-8 transition-colors duration-500 ${
-          isDarkMode ? "bg-slate-900" : "bg-slate-50"
-        }`}
+        className="min-h-screen flex items-center justify-center px-6 lg:px-8 transition-colors duration-500 bg-background"
       >
         <div className="text-center max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-6">
-            <div className="relative order-2 md:order-1">
-              <Image
-                src="/memoji.png"
-                alt="Ajay Nichani Memoji"
-                width={120}
-                height={120}
-                className="rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
-                priority
-              />
-            </div>
-            <h1
-              className={`text-4xl md:text-6xl lg:text-7xl font-bold transition-colors duration-500 order-1 md:order-2 ${
-                isDarkMode ? "text-slate-100" : "text-slate-900"
-              }`}
-            >
-              Hi, I'm <span className="text-slate-900 dark:text-slate-100">Ajay Nichani</span>
-            </h1>
-          </div>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 transition-colors duration-500 text-foreground">
+            Hi, I'm {/* Updated gradient to use new color palette */}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Ajay Nichani</span>
+          </h1>
+
+          <h2 className="text-2xl md:text-3xl font-medium mb-8 transition-colors duration-500 text-muted-foreground">
+            Full-Stack Product Manager
+          </h2>
 
           <div className="mb-12 flex justify-center">
             <Typewriter phrases={typewriterPhrases} />
@@ -209,18 +209,14 @@ export default function Portfolio() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               onClick={() => scrollToSection("contact")}
-              className="bg-teal-600 hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 text-white px-8 py-3 text-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 text-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Get in Touch
             </Button>
             <Button
               onClick={() => scrollToSection("projects")}
               variant="outline"
-              className={`px-8 py-3 text-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl ${
-                isDarkMode
-                  ? "border-slate-600 text-slate-300 hover:bg-slate-800 hover:border-teal-400"
-                  : "border-slate-300 text-slate-700 hover:bg-slate-100 hover:border-teal-600"
-              }`}
+              className="px-8 py-3 text-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border-border text-foreground hover:bg-muted hover:border-primary"
             >
               View My Work
             </Button>
@@ -229,752 +225,280 @@ export default function Portfolio() {
       </section>
 
       {/* Projects Section */}
-      <section
-        id="projects"
-        className={`py-24 transition-colors duration-500 opacity-0 ${isDarkMode ? "bg-slate-800" : "bg-white"}`}
-      >
+      <section id="projects" className="py-24 transition-colors duration-500 opacity-0 bg-card">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2
-              className={`text-4xl font-bold mb-4 transition-colors duration-500 ${
-                isDarkMode ? "text-slate-100" : "text-slate-800"
-              }`}
-            >
+            <h2 className="text-4xl font-bold mb-4 transition-colors duration-500 text-foreground">
               Products & Projects
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-teal-600 to-purple-600 dark:from-teal-400 dark:to-purple-400 mx-auto rounded-full"></div>
+            <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             {/* MathStack AI */}
-            <Card
-              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group cursor-pointer ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
-              onClick={() => window.open("https://mathstackai.app", "_blank")}
-            >
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background">
               <CardContent className="p-8">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                    <div className="text-white text-2xl font-bold">∑</div>
-                  </div>
-                  <h3
-                    className={`text-2xl font-semibold transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
-                  >
-                    MathStack AI
-                  </h3>
-                </div>
-                <p
-                  className={`mb-6 leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-                >
+                <h3 className="text-2xl font-semibold mb-4 transition-colors duration-500 text-foreground">
+                  MathStack AI
+                </h3>
+                <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
                   An AI-powered EdTech platform for mathematics learning that personalizes the educational experience
                   using advanced machine learning algorithms.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
-                    Generative AI
+                  <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform">AI/ML</Badge>
+                  <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform">EdTech</Badge>
+                  <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform">Next.js</Badge>
+                  <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform">
+                    User Accounts
                   </Badge>
-                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
-                    SaaS
-                  </Badge>
-                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
-                    Stripe Integration
-                  </Badge>
-                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
-                    Authentication
-                  </Badge>
-                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
-                    Account Sign Up
+                  <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform">
+                    Database Creation
                   </Badge>
                 </div>
               </CardContent>
             </Card>
 
             {/* InterRoom */}
-            <Card
-              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group cursor-pointer ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
-              onClick={() => window.open("https://interroom.me", "_blank")}
-            >
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background">
               <CardContent className="p-8">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg">
-                    <Users className="w-8 h-8 text-white" />
-                  </div>
-                  <h3
-                    className={`text-2xl font-semibold transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
-                  >
-                    InterRoom
-                  </h3>
-                </div>
-                <p
-                  className={`mb-6 leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-                >
+                <h3 className="text-2xl font-semibold mb-4 transition-colors duration-500 text-foreground">
+                  InterRoom
+                </h3>
+                <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
                   An HR SaaS platform featuring a comprehensive client portal and job tracker, streamlining recruitment
                   processes for enterprise clients.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
-                    SaaS
-                  </Badge>
-                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
-                    HR Tech
-                  </Badge>
-                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
-                    React
-                  </Badge>
-                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
-                    Multi-Page Website
-                  </Badge>
-                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
-                    Interactive Tools
-                  </Badge>
-                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
-                    Custom Forms
-                  </Badge>
+                  <Badge className="bg-accent/10 text-accent hover:scale-105 transition-transform">SaaS</Badge>
+                  <Badge className="bg-accent/10 text-accent hover:scale-105 transition-transform">HR Tech</Badge>
+                  <Badge className="bg-accent/10 text-accent hover:scale-105 transition-transform">React</Badge>
+                  <Badge className="bg-accent/10 text-accent hover:scale-105 transition-transform">Firebase</Badge>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Interview Ace */}
-            <Card
-              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group cursor-pointer ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
-              onClick={() => window.open("https://v0-behavioral-interview-app-nine.vercel.app/", "_blank")}
-            >
+            {/* Behavioral Math App */}
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background">
               <CardContent className="p-8">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center shadow-lg">
-                    <Zap className="w-8 h-8 text-white" />
-                  </div>
-                  <h3
-                    className={`text-2xl font-semibold transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
-                  >
-                    Interview Ace
-                  </h3>
-                </div>
-                <p
-                  className={`mb-6 leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-                >
-                  A web application designed to improve interview skills through behavioral science principles, making
-                  practicing engaging and effective.
+                <h3 className="text-2xl font-semibold mb-4 transition-colors duration-500 text-foreground">
+                  Behavioral Math App
+                </h3>
+                <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
+                  A mobile application designed to improve math skills through behavioral science principles, making
+                  learning engaging and effective.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
+                  <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform">Mobile App</Badge>
+                  <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform">EdTech</Badge>
+                  <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform">
                     Gamification
-                  </Badge>
-                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
-                    Web App
-                  </Badge>
-                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
-                    React
-                  </Badge>
-                  <Badge className="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 transition-transform">
-                    Multi-Page Website
                   </Badge>
                 </div>
               </CardContent>
             </Card>
 
             {/* NFL Pick 'Em App */}
-            <Card
-              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group cursor-pointer ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"}`}
-              onClick={() => window.open("https://nflpickens.lovable.app/", "_blank")}
-            >
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background">
               <CardContent className="p-8">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
-                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                      <div className="w-6 h-6 bg-amber-600 rounded-full relative">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-1 h-4 bg-white rounded-full"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <h3
-                    className={`text-2xl font-semibold transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
-                  >
-                    NFL Pick 'Em App
-                  </h3>
-                </div>
-                <p
-                  className={`mb-6 leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-                >
+                <h3 className="text-2xl font-semibold mb-4 transition-colors duration-500 text-foreground">
+                  NFL Pick 'Em App
+                </h3>
+                <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
                   A web application for friends to compete in NFL weekly pick'em pools, featuring real-time scoring and
                   social competition.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
-                    Web App
-                  </Badge>
-                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
+                  <Badge className="bg-accent/10 text-accent hover:scale-105 transition-transform">Web App</Badge>
+                  <Badge className="bg-accent/10 text-accent hover:scale-105 transition-transform">
                     End-to-End Development
                   </Badge>
-                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
-                    Futuristic Design
-                  </Badge>
-                  <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 transition-transform">
-                    Loveable
+                  <Badge className="bg-accent/10 text-accent hover:scale-105 transition-transform">
+                    Monetization (Stripe)
                   </Badge>
                 </div>
               </CardContent>
             </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* My Process Section */}
-      <section
-        id="process"
-        className={`py-24 transition-colors duration-500 opacity-0 ${isDarkMode ? "bg-slate-900" : "bg-white"}`}
-      >
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2
-              className={`text-4xl font-bold mb-4 transition-colors duration-500 ${
-                isDarkMode ? "text-slate-100" : "text-slate-800"
-              }`}
-            >
-              My Process
-            </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-teal-600 to-purple-600 dark:from-teal-400 dark:to-purple-400 mx-auto rounded-full"></div>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Consultation Call */}
-            <div className="text-center group">
-              <div className="relative mb-6">
-                <div
-                  className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300 group-hover:scale-110 shadow-lg ${isDarkMode ? "bg-teal-600 text-white" : "bg-teal-100 text-teal-700 border-2 border-teal-200"}`}
-                >
-                  1
-                </div>
-              </div>
-              <h3
-                className={`text-xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
-              >
-                Consultation Call
-              </h3>
-              <p
-                className={`leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-              >
-                We start with a detailed discussion about your vision, goals, and requirements to understand exactly
-                what you need.
-              </p>
-            </div>
-
-            {/* Initial Prototype */}
-            <div className="text-center group">
-              <div className="relative mb-6">
-                <div
-                  className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300 group-hover:scale-110 shadow-lg ${isDarkMode ? "bg-purple-600 text-white" : "bg-purple-100 text-purple-700 border-2 border-purple-200"}`}
-                >
-                  2
-                </div>
-              </div>
-              <h3
-                className={`text-xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
-              >
-                Initial Prototype
-              </h3>
-              <p
-                className={`leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-              >
-                I create a working prototype to validate concepts and gather feedback before moving to full development.
-              </p>
-            </div>
-
-            {/* Production Ready */}
-            <div className="text-center group">
-              <div className="relative mb-6">
-                <div
-                  className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300 group-hover:scale-110 shadow-lg ${isDarkMode ? "bg-teal-600 text-white" : "bg-teal-100 text-teal-700 border-2 border-teal-200"}`}
-                >
-                  3
-                </div>
-              </div>
-              <h3
-                className={`text-xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
-              >
-                Production Ready
-              </h3>
-              <p
-                className={`leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-              >
-                The final product is built with scalability, security, and performance in mind, ready for real users.
-              </p>
-            </div>
-
-            {/* Maintain */}
-            <div className="text-center group">
-              <div className="relative mb-6">
-                <div
-                  className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300 group-hover:scale-110 shadow-lg ${isDarkMode ? "bg-purple-600 text-white" : "bg-purple-100 text-purple-700 border-2 border-purple-200"}`}
-                >
-                  4
-                </div>
-              </div>
-              <h3
-                className={`text-xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
-              >
-                Maintain
-              </h3>
-              <p
-                className={`leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-              >
-                Ongoing support, updates, and improvements to ensure your product continues to meet evolving needs.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section
-        id="pricing"
-        className={`py-24 transition-colors duration-500 opacity-0 ${isDarkMode ? "bg-slate-800" : "bg-white"}`}
-      >
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2
-              className={`text-4xl font-bold mb-4 transition-colors duration-500 ${
-                isDarkMode ? "text-slate-100" : "text-slate-800"
-              }`}
-            >
-              Pricing
-            </h2>
-            <p
-              className={`text-xl mb-8 transition-colors duration-500 ${
-                isDarkMode ? "text-slate-300" : "text-slate-600"
-              }`}
-            >
-              Find the perfect package for your needs
-            </p>
-            <div className="w-20 h-1 bg-gradient-to-r from-teal-600 to-purple-600 dark:from-teal-400 dark:to-purple-400 mx-auto rounded-full"></div>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {/* Basic Package */}
-            <Card
-              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"} flex flex-col`}
-            >
-              <CardContent className="p-8 flex flex-col flex-grow">
-                <div className="text-center mb-6">
-                  <h3
-                    className={`text-2xl font-semibold mb-2 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
-                  >
-                    Basic
-                  </h3>
-                  <p
-                    className={`text-sm mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-                  >
-                    Single Static Page
-                  </p>
-                  <div className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-2">$375 – $750</div>
-                  <p className={`text-sm ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>~1 week timeline</p>
-                </div>
-                <p
-                  className={`mb-6 leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-                >
-                  For personal brands or simple landing pages.
-                </p>
-                <div className="space-y-3 mb-8 flex-grow">
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      1 responsive, mobile-optimized static landing page
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      Google Analytics setup
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      Basic SEO setup
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      Simple contact form
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      Limited revisions
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      Deployed to client's hosting/domain
-                    </span>
-                  </div>
-                </div>
-                <Button
-                  onClick={() => scrollToSection("contact")}
-                  className="w-full bg-teal-600 hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 text-white mt-auto"
-                >
-                  Get Started
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* Plus Package */}
-            <Card
-              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"} relative flex flex-col`}
-            >
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <Badge className="bg-purple-600 text-white px-4 py-1">Most Popular</Badge>
-              </div>
-              <CardContent className="p-8 flex flex-col flex-grow">
-                <div className="text-center mb-6">
-                  <h3
-                    className={`text-2xl font-semibold mb-2 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
-                  >
-                    Plus
-                  </h3>
-                  <p
-                    className={`text-sm mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-                  >
-                    Multi-Page Website (No Integrations)
-                  </p>
-                  <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">$750 – $1,875</div>
-                  <p className={`text-sm ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>~1–3 weeks timeline</p>
-                </div>
-                <p
-                  className={`mb-6 leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-                >
-                  For small businesses needing a clean, professional web presence.
-                </p>
-                <div className="space-y-3 mb-8 flex-grow">
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      3–5 responsive, mobile-optimized pages
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      Google Analytics setup
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      Basic SEO setup
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>Optional CMS</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      Limited (but way more) revisions
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      Deployed to client's hosting/domain
-                    </span>
-                  </div>
-                </div>
-                <Button
-                  onClick={() => scrollToSection("contact")}
-                  className="w-full bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 text-white mt-auto"
-                >
-                  Get Started
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* Premium Package */}
-            <Card
-              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${isDarkMode ? "bg-slate-700/50" : "bg-slate-50/50"} flex flex-col`}
-            >
-              <CardContent className="p-8 flex flex-col flex-grow">
-                <div className="text-center mb-6">
-                  <h3
-                    className={`text-2xl font-semibold mb-2 transition-colors duration-500 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}
-                  >
-                    Premium
-                  </h3>
-                  <p
-                    className={`text-sm mb-4 transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-                  >
-                    Multi-Page Website with Integrations
-                  </p>
-                  <div className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-2">Starting at $1,875</div>
-                  <p className={`text-sm ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>~2–4 weeks timeline</p>
-                </div>
-                <p
-                  className={`mb-6 leading-relaxed transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-                >
-                  For growing businesses needing custom features.
-                </p>
-                <div className="space-y-3 mb-8 flex-grow">
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      5–10 responsive, mobile-optimized pages
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      Stripe payment or booking system integration
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      Google Analytics setup with event tracking
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>Advanced SEO</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>CMS setup</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      Custom forms/email automations
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      Performance optimization
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      Unlimited revisions
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
-                    <span className={`text-sm ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                      Deployed to client's hosting/domain
-                    </span>
-                  </div>
-                </div>
-                <Button
-                  onClick={() => scrollToSection("contact")}
-                  className="w-full bg-teal-600 hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 text-white mt-auto"
-                >
-                  Get Started
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Optional Add-Ons */}
-          <div className="text-center">
-            <h3
-              className={`text-2xl font-semibold mb-8 transition-colors duration-500 ${
-                isDarkMode ? "text-slate-100" : "text-slate-800"
-              }`}
-            >
-              Optional Add-Ons
-            </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div
-                className={`p-6 rounded-lg border transition-colors duration-500 ${
-                  isDarkMode ? "bg-slate-700/30 border-slate-600" : "bg-slate-50 border-slate-200"
-                }`}
-              >
-                <h4 className={`font-semibold mb-2 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}>
-                  Maintenance Retainer
-                </h4>
-                <p className="text-teal-600 dark:text-teal-400 font-bold">$200–$500/month</p>
-              </div>
-              <div
-                className={`p-6 rounded-lg border transition-colors duration-500 ${
-                  isDarkMode ? "bg-slate-700/30 border-slate-600" : "bg-slate-50 border-slate-200"
-                }`}
-              >
-                <h4 className={`font-semibold mb-2 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}>
-                  Extra Pages
-                </h4>
-                <p className="text-purple-600 dark:text-purple-400 font-bold">$150–$250/page</p>
-              </div>
-              <div
-                className={`p-6 rounded-lg border transition-colors duration-500 ${
-                  isDarkMode ? "bg-slate-700/30 border-slate-600" : "bg-slate-50 border-slate-200"
-                }`}
-              >
-                <h4 className={`font-semibold mb-2 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}>Blog Setup</h4>
-                <p className="text-teal-600 dark:text-teal-400 font-bold">$300–$500</p>
-              </div>
-              <div
-                className={`p-6 rounded-lg border transition-colors duration-500 ${
-                  isDarkMode ? "bg-slate-700/30 border-slate-600" : "bg-slate-50 border-slate-200"
-                }`}
-              >
-                <h4 className={`font-semibold mb-2 ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}>
-                  Custom Integrations
-                </h4>
-                <p className="text-purple-600 dark:text-purple-400 font-bold">Custom Pricing</p>
-                <p className={`text-xs mt-1 ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>
-                  Shopify, Stripe, etc.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
       {/* Experience Section */}
-      <section
-        id="experience"
-        className={`py-24 transition-colors duration-500 opacity-0 ${isDarkMode ? "bg-slate-900" : "bg-white"}`}
-      >
+      <section id="experience" className="py-24 transition-colors duration-500 opacity-0 bg-background">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2
-              className={`text-4xl font-bold mb-4 transition-colors duration-500 ${
-                isDarkMode ? "text-slate-100" : "text-slate-800"
-              }`}
-            >
-              Experience
-            </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-teal-600 to-purple-600 dark:from-teal-400 dark:to-purple-400 mx-auto rounded-full"></div>
+            <h2 className="text-4xl font-bold mb-4 transition-colors duration-500 text-foreground">Experience</h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
           </div>
 
-          <div className="space-y-8">
-            {/* Experience Card: MathStack AI */}
-            <Card
-              className={`group transition-all duration-300 hover:shadow-lg hover:border-teal-500 dark:hover:border-teal-400 ${isDarkMode ? "bg-slate-700/50 border-slate-700" : "bg-slate-50/50 border-slate-200"}`}
-            >
-              <CardContent className="p-6">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className={`text-xl font-semibold ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}>
-                      Founder
-                    </h3>
-                    <p className="text-teal-600 dark:text-teal-400 font-medium">MathStack AI</p>
-                  </div>
-                  <p className={`text-sm ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>2024 - Present</p>
-                </div>
-                <ul
-                  className={`mt-4 space-y-2 text-sm list-disc list-inside ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-                >
-                  <li>Founded an AI-powered EdTech platform focused on mathematics learning</li>
-                  <li>Developed innovative AI-driven solutions for personalized learning experiences</li>
-                  <li>Built end-to-end product strategy and technical implementation</li>
-                </ul>
-                <Button
-                  variant="link"
-                  className="p-0 h-auto mt-4 text-teal-600 dark:text-teal-400 group-hover:underline"
-                >
-                  Read More <ArrowRight className="w-4 h-4 ml-1" />
-                </Button>
-              </CardContent>
-            </Card>
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              {/* Vertical dashed line */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-px border-l-2 border-dashed border-border"></div>
 
-            {/* Experience Card: InterRoom */}
-            <Card
-              className={`group transition-all duration-300 hover:shadow-lg hover:border-purple-500 dark:hover:border-purple-400 ${isDarkMode ? "bg-slate-700/50 border-slate-700" : "bg-slate-50/50 border-slate-200"}`}
-            >
-              <CardContent className="p-6">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className={`text-xl font-semibold ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}>
-                      Product Lead
-                    </h3>
-                    <p className="text-purple-600 dark:text-purple-400 font-medium">InterRoom</p>
+              <div className="space-y-12">
+                {/* MathStack AI */}
+                <div className="relative flex items-start">
+                  {/* Left side - Date */}
+                  <div className="w-1/2 pr-8 text-right">
+                    <p className="text-lg font-medium text-muted-foreground">2024 - Present</p>
                   </div>
-                  <p className={`text-sm ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>2023 - Present</p>
-                </div>
-                <ul
-                  className={`mt-4 space-y-2 text-sm list-disc list-inside ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-                >
-                  <li>Leading product development for HR SaaS platform with client portal and job tracker</li>
-                  <li>Driving user-centric design and feature development</li>
-                  <li>Managing cross-functional teams to deliver enterprise solutions</li>
-                </ul>
-                <Button
-                  variant="link"
-                  className="p-0 h-auto mt-4 text-purple-600 dark:text-purple-400 group-hover:underline"
-                >
-                  Read More <ArrowRight className="w-4 h-4 ml-1" />
-                </Button>
-              </CardContent>
-            </Card>
 
-            {/* Experience Card: Nimble RX */}
-            <Card
-              className={`group transition-all duration-300 hover:shadow-lg hover:border-teal-500 dark:hover:border-teal-400 ${isDarkMode ? "bg-slate-700/50 border-slate-700" : "bg-slate-50/50 border-slate-200"}`}
-            >
-              <CardContent className="p-6">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className={`text-xl font-semibold ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}>
-                      Senior Product Manager
-                    </h3>
-                    <p className="text-teal-600 dark:text-teal-400 font-medium">Nimble RX</p>
+                  {/* Center circle */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1">
+                    <div className="w-6 h-6 rounded-full border-2 border-dashed border-primary bg-background flex items-center justify-center">
+                      <div className="w-3 h-3 rounded-full bg-primary"></div>
+                    </div>
                   </div>
-                  <p className={`text-sm ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>2022</p>
-                </div>
-                <ul
-                  className={`mt-4 space-y-2 text-sm list-disc list-inside ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-                >
-                  <li>Managed product development for healthcare technology solutions</li>
-                  <li>Focused on improving patient experience and operational efficiency</li>
-                  <li>Collaborated with healthcare professionals to define product requirements</li>
-                </ul>
-                <Button
-                  variant="link"
-                  className="p-0 h-auto mt-4 text-teal-600 dark:text-teal-400 group-hover:underline"
-                >
-                  Read More <ArrowRight className="w-4 h-4 ml-1" />
-                </Button>
-              </CardContent>
-            </Card>
 
-            {/* Experience Card: Shopkick */}
-            <Card
-              className={`group transition-all duration-300 hover:shadow-lg hover:border-purple-500 dark:hover:border-purple-400 ${isDarkMode ? "bg-slate-700/50 border-slate-700" : "bg-slate-50/50 border-slate-200"}`}
-            >
-              <CardContent className="p-6">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className={`text-xl font-semibold ${isDarkMode ? "text-slate-100" : "text-slate-800"}`}>
-                      Senior Product Manager / Product Manager
-                    </h3>
-                    <p className="text-purple-600 dark:text-purple-400 font-medium">Shopkick</p>
+                  {/* Right side - Job info */}
+                  <div className="w-1/2 pl-8">
+                    <div className="flex items-start gap-4">
+                      <div className="flex-1">
+                        <h4 className="text-xl font-semibold mb-2 text-foreground">Founder</h4>
+                        <h5 className="text-lg text-primary mb-3 font-medium">MathStack AI</h5>
+                        <ul className="space-y-2 leading-relaxed text-muted-foreground">
+                          <li>• Founded an AI-powered EdTech platform focused on mathematics learning</li>
+                          <li>• Developed innovative AI-driven solutions for personalized learning experiences</li>
+                          <li>• Built end-to-end product strategy and technical implementation</li>
+                        </ul>
+                      </div>
+                      <div className="flex flex-col gap-3 pt-2">
+                        <div className="p-2 rounded-lg bg-primary/10">
+                          <Calculator className="h-5 w-5 text-primary" />
+                        </div>
+                        <div className="p-2 rounded-lg bg-primary/10">
+                          <BarChart3 className="h-5 w-5 text-primary" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <p className={`text-sm ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>2017 - 2022</p>
                 </div>
-                <ul
-                  className={`mt-4 space-y-2 text-sm list-disc list-inside ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
-                >
-                  <li>Led development of Digital Receipts product line, increasing purchase conversion by 30% YoY</li>
-                  <li>Built Targeted Video Advertising platform generating $10M ARR</li>
-                  <li>Managed end-to-end product lifecycle from conception to launch</li>
-                  <li>Drove user acquisition and engagement strategies for mobile commerce platform</li>
-                  <li>Collaborated with engineering, design, and business teams to deliver impactful features</li>
-                </ul>
-                <Button
-                  variant="link"
-                  className="p-0 h-auto mt-4 text-purple-600 dark:text-purple-400 group-hover:underline"
-                >
-                  Read More <ArrowRight className="w-4 h-4 ml-1" />
-                </Button>
-              </CardContent>
-            </Card>
+
+                {/* InterRoom */}
+                <div className="relative flex items-start">
+                  {/* Left side - Date */}
+                  <div className="w-1/2 pr-8 text-right">
+                    <p className="text-lg font-medium text-muted-foreground">2023 - Present</p>
+                  </div>
+
+                  {/* Center circle */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1">
+                    <div className="w-6 h-6 rounded-full border-2 border-dashed border-accent bg-background flex items-center justify-center">
+                      <div className="w-3 h-3 rounded-full bg-accent"></div>
+                    </div>
+                  </div>
+
+                  {/* Right side - Job info */}
+                  <div className="w-1/2 pl-8">
+                    <div className="flex items-start gap-4">
+                      <div className="flex-1">
+                        <h4 className="text-xl font-semibold mb-2 text-foreground">Product Lead</h4>
+                        <h5 className="text-lg text-accent mb-3 font-medium">InterRoom</h5>
+                        <ul className="space-y-2 leading-relaxed text-muted-foreground">
+                          <li>• Leading product development for HR SaaS platform with client portal and job tracker</li>
+                          <li>• Driving user-centric design and feature development</li>
+                          <li>• Managing cross-functional teams to deliver enterprise solutions</li>
+                        </ul>
+                      </div>
+                      <div className="flex flex-col gap-3 pt-2">
+                        <div className="p-2 rounded-lg bg-accent/10">
+                          <Briefcase className="h-5 w-5 text-accent" />
+                        </div>
+                        <div className="p-2 rounded-lg bg-accent/10">
+                          <Users className="h-5 w-5 text-accent" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Nimble RX */}
+                <div className="relative flex items-start">
+                  {/* Left side - Date */}
+                  <div className="w-1/2 pr-8 text-right">
+                    <p className="text-lg font-medium text-muted-foreground">2022</p>
+                  </div>
+
+                  {/* Center circle */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1">
+                    <div className="w-6 h-6 rounded-full border-2 border-dashed border-primary bg-background flex items-center justify-center">
+                      <div className="w-3 h-3 rounded-full bg-primary"></div>
+                    </div>
+                  </div>
+
+                  {/* Right side - Job info */}
+                  <div className="w-1/2 pl-8">
+                    <div className="flex items-start gap-4">
+                      <div className="flex-1">
+                        <h4 className="text-xl font-semibold mb-2 text-foreground">Senior Product Manager</h4>
+                        <h5 className="text-lg text-primary mb-3 font-medium">Nimble RX</h5>
+                        <ul className="space-y-2 leading-relaxed text-muted-foreground">
+                          <li>• Managed product development for healthcare technology solutions</li>
+                          <li>• Focused on improving patient experience and operational efficiency</li>
+                          <li>• Collaborated with healthcare professionals to define product requirements</li>
+                        </ul>
+                      </div>
+                      <div className="flex flex-col gap-3 pt-2">
+                        <div className="p-2 rounded-lg bg-primary/10">
+                          <Pill className="h-5 w-5 text-primary" />
+                        </div>
+                        <div className="p-2 rounded-lg bg-primary/10">
+                          <Cross className="h-5 w-5 text-primary" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Shopkick */}
+                <div className="relative flex items-start">
+                  {/* Left side - Date */}
+                  <div className="w-1/2 pr-8 text-right">
+                    <p className="text-lg font-medium text-muted-foreground">2017 - 2022</p>
+                  </div>
+
+                  {/* Center circle */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1">
+                    <div className="w-6 h-6 rounded-full border-2 border-dashed border-accent bg-background flex items-center justify-center">
+                      <div className="w-3 h-3 rounded-full bg-accent"></div>
+                    </div>
+                  </div>
+
+                  {/* Right side - Job info */}
+                  <div className="w-1/2 pl-8">
+                    <div className="flex items-start gap-4">
+                      <div className="flex-1">
+                        <h4 className="text-xl font-semibold mb-2 text-foreground">
+                          Senior Product Manager / Product Manager
+                        </h4>
+                        <h5 className="text-lg text-accent mb-3 font-medium">Shopkick</h5>
+                        <ul className="space-y-2 leading-relaxed text-muted-foreground">
+                          <li>
+                            • Led development of Digital Receipts product line, increasing purchase conversion by 30%
+                            YoY
+                          </li>
+                          <li>• Built Targeted Video Advertising platform generating $10M ARR</li>
+                          <li>• Managed end-to-end product lifecycle from conception to launch</li>
+                          <li>• Drove user acquisition and engagement strategies for mobile commerce platform</li>
+                          <li>
+                            • Collaborated with engineering, design, and business teams to deliver impactful features
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="flex flex-col gap-3 pt-2">
+                        <div className="p-2 rounded-lg bg-accent/10">
+                          <Smartphone className="h-5 w-5 text-accent" />
+                        </div>
+                        <div className="p-2 rounded-lg bg-accent/10">
+                          <DollarSign className="h-5 w-5 text-accent" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -982,40 +506,40 @@ export default function Portfolio() {
       {/* Contact Section */}
       <section
         id="contact"
-        className={`py-24 relative overflow-hidden opacity-0 ${
-          isDarkMode
-            ? "bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800"
-            : "bg-gradient-to-br from-slate-700 via-slate-600 to-slate-700"
-        }`}
+        className="py-24 relative overflow-hidden opacity-0 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20"
       >
         <div className="max-w-6xl mx-auto px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-4xl font-bold text-white mb-4">Get in Touch</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-teal-400 to-purple-400 mx-auto mb-8 rounded-full"></div>
-          <p className="text-xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+          <h2 className="text-4xl font-bold text-foreground mb-4">Get in Touch</h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto mb-8 rounded-full"></div>
+          <p className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
             Ready to collaborate on your next product challenge? Let's connect and explore how we can create exceptional
             user experiences together.
           </p>
 
-          <div className="flex justify-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Button
-              className="bg-teal-600 hover:bg-teal-700 text-white px-10 py-4 text-lg font-medium flex items-center gap-3 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-              onClick={() => window.open("mailto:ajay_work@icloud.com", "_blank")}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 py-4 text-lg font-medium flex items-center gap-3 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              onClick={() => window.open("mailto:ajay@example.com", "_blank")}
             >
               <Mail size={20} />
               Email Me
+            </Button>
+            <Button
+              variant="outline"
+              className="border-border text-foreground hover:bg-muted hover:border-primary px-10 py-4 text-lg font-medium flex items-center gap-3 bg-transparent transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              onClick={() => window.open("https://linkedin.com/in/ajaynichani", "_blank")}
+            >
+              <Linkedin size={20} />
+              LinkedIn
             </Button>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer
-        className={`border-t py-8 transition-colors duration-500 ${
-          isDarkMode ? "bg-slate-900 border-slate-800" : "bg-slate-800 border-slate-700"
-        }`}
-      >
+      <footer className="border-t py-8 transition-colors duration-500 bg-card border-border">
         <div className="max-w-6xl mx-auto px-6 lg:px-8 text-center">
-          <p className="text-slate-400">© 2025 Ajay Nichani. All Rights Reserved.</p>
+          <p className="text-muted-foreground">© 2025 Ajay Nichani. All Rights Reserved.</p>
         </div>
       </footer>
 
