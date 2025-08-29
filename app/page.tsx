@@ -238,9 +238,16 @@ export default function Portfolio() {
             {/* MathStack AI */}
             <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold mb-4 transition-colors duration-500 text-foreground">
-                  MathStack AI
-                </h3>
+                <a
+                  href="https://mathstackai.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block hover:opacity-80 transition-opacity"
+                >
+                  <h3 className="text-2xl font-semibold mb-4 transition-colors duration-500 text-foreground">
+                    MathStack AI
+                  </h3>
+                </a>
                 <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
                   An AI-powered EdTech platform for mathematics learning that personalizes the educational experience
                   using advanced machine learning algorithms.
@@ -262,9 +269,16 @@ export default function Portfolio() {
             {/* InterRoom */}
             <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold mb-4 transition-colors duration-500 text-foreground">
-                  InterRoom
-                </h3>
+                <a
+                  href="https://interroom.me"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block hover:opacity-80 transition-opacity"
+                >
+                  <h3 className="text-2xl font-semibold mb-4 transition-colors duration-500 text-foreground">
+                    InterRoom
+                  </h3>
+                </a>
                 <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
                   An HR SaaS platform featuring a comprehensive client portal and job tracker, streamlining recruitment
                   processes for enterprise clients.
@@ -278,11 +292,11 @@ export default function Portfolio() {
               </CardContent>
             </Card>
 
-            {/* Behavioral Math App */}
+            {/* Behavioral Interview App */}
             <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold mb-4 transition-colors duration-500 text-foreground">
-                  Behavioral Math App
+                  Behavioral Interview App
                 </h3>
                 <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
                   A mobile application designed to improve math skills through behavioral science principles, making
