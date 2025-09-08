@@ -7,6 +7,14 @@ import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
 import { Typewriter } from "@/components/ui/typewriter"
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogDescription,
+} from "@/components/ui/dialog"
+import {
   Menu,
   X,
   Mail,
@@ -21,6 +29,10 @@ import {
   Cross,
   Smartphone,
   DollarSign,
+  Lightbulb,
+  Building,
+  Heart,
+  ShoppingBag,
 } from "lucide-react"
 
 export default function Portfolio() {
@@ -87,7 +99,7 @@ export default function Portfolio() {
 
   const navItems = [
     { id: "home", label: "Home" },
-    { id: "projects", label: "Projects" },
+    { id: "projects", label: "Products" },
     { id: "experience", label: "Experience" },
     { id: "contact", label: "Contact" },
   ]
@@ -101,20 +113,17 @@ export default function Portfolio() {
       {/* Navigation */}
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-          isScrolled
-            ? isDarkMode
-              ? "bg-background/80 backdrop-blur-md border-b border-border/50"
-              : "bg-background/80 backdrop-blur-md border-b border-border/50"
-            : "bg-transparent"
+          isScrolled ? "bg-white/90 backdrop-blur-md border-b border-gray-200" : "bg-transparent"
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Added Memoji image to header navigation */}
             <div
-              className={`font-medium text-xl transition-colors duration-500 flex items-center gap-3 ${
-                isDarkMode ? "text-foreground" : "text-foreground"
-              }`}
+              className="font-medium text-xl transition-colors duration-500 flex items-center gap-3"
+              style={{
+                color: isScrolled ? "#1f2937" : "#ffffff",
+                textShadow: isScrolled ? "none" : "0 2px 4px rgba(0,0,0,0.5)",
+              }}
             >
               <img src="/memoji.png" alt="Ajay Nichani Memoji" className="w-10 h-10 rounded-full" />
               Ajay Nichani
@@ -126,9 +135,18 @@ export default function Portfolio() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
-                    activeSection === item.id ? "text-primary" : "text-muted-foreground hover:text-primary"
-                  }`}
+                  className="text-sm font-medium transition-all duration-300 hover:scale-105"
+                  style={{
+                    color: isScrolled
+                      ? activeSection === item.id
+                        ? "#3b82f6"
+                        : "#6b7280"
+                      : activeSection === item.id
+                        ? "#ffffff"
+                        : "rgba(255,255,255,0.9)",
+                    textShadow: isScrolled ? "none" : "0 2px 4px rgba(0,0,0,0.5)",
+                    fontWeight: activeSection === item.id ? "600" : "500",
+                  }}
                 >
                   {item.label}
                 </button>
@@ -137,11 +155,19 @@ export default function Portfolio() {
               {/* Dark Mode Toggle */}
               <div className="flex items-center space-x-3">
                 <Sun
-                  className={`h-4 w-4 transition-colors ${isDarkMode ? "text-muted-foreground" : "text-amber-500"}`}
+                  className="h-4 w-4 transition-colors"
+                  style={{
+                    color: isScrolled ? "#f59e0b" : "rgba(255,255,255,0.8)",
+                    filter: isScrolled ? "none" : "drop-shadow(0 2px 4px rgba(0,0,0,0.5))",
+                  }}
                 />
                 <Switch checked={isDarkMode} onCheckedChange={toggleDarkMode} />
                 <Moon
-                  className={`h-4 w-4 transition-colors ${isDarkMode ? "text-primary" : "text-muted-foreground"}`}
+                  className="h-4 w-4 transition-colors"
+                  style={{
+                    color: isScrolled ? "#6b7280" : "rgba(255,255,255,0.8)",
+                    filter: isScrolled ? "none" : "drop-shadow(0 2px 4px rgba(0,0,0,0.5))",
+                  }}
                 />
               </div>
             </div>
@@ -150,16 +176,28 @@ export default function Portfolio() {
             <div className="md:hidden flex items-center space-x-4">
               <div className="flex items-center space-x-3">
                 <Sun
-                  className={`h-4 w-4 transition-colors ${isDarkMode ? "text-muted-foreground" : "text-amber-500"}`}
+                  className="h-4 w-4 transition-colors"
+                  style={{
+                    color: isScrolled ? "#f59e0b" : "rgba(255,255,255,0.8)",
+                    filter: isScrolled ? "none" : "drop-shadow(0 2px 4px rgba(0,0,0,0.5))",
+                  }}
                 />
                 <Switch checked={isDarkMode} onCheckedChange={toggleDarkMode} />
                 <Moon
-                  className={`h-4 w-4 transition-colors ${isDarkMode ? "text-primary" : "text-muted-foreground"}`}
+                  className="h-4 w-4 transition-colors"
+                  style={{
+                    color: isScrolled ? "#6b7280" : "rgba(255,255,255,0.8)",
+                    filter: isScrolled ? "none" : "drop-shadow(0 2px 4px rgba(0,0,0,0.5))",
+                  }}
                 />
               </div>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="transition-colors"
+                style={{
+                  color: isScrolled ? "#6b7280" : "rgba(255,255,255,0.9)",
+                  filter: isScrolled ? "none" : "drop-shadow(0 2px 4px rgba(0,0,0,0.5))",
+                }}
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -169,14 +207,15 @@ export default function Portfolio() {
           {/* Mobile Navigation */}
           {isMenuOpen && (
             <div className="md:hidden">
-              <div className="px-4 pt-4 pb-6 space-y-3 border-t bg-background/95 border-border/50">
+              <div className="px-4 pt-4 pb-6 space-y-3 border-t bg-white/95 border-gray-200">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`block px-4 py-3 text-base font-medium transition-colors ${
-                      activeSection === item.id ? "text-primary" : "text-muted-foreground hover:text-primary"
-                    }`}
+                    className="block px-4 py-3 text-base font-medium transition-colors"
+                    style={{
+                      color: activeSection === item.id ? "#3b82f6" : "#6b7280",
+                    }}
                   >
                     {item.label}
                   </button>
@@ -190,15 +229,20 @@ export default function Portfolio() {
       {/* Hero Section */}
       <section
         id="home"
-        className="min-h-screen flex items-center justify-center px-6 lg:px-8 transition-colors duration-500 bg-background"
+        className="min-h-screen flex items-center justify-center px-6 lg:px-8 transition-colors duration-500"
+        style={{
+          background: "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)",
+        }}
       >
         <div className="text-center max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 transition-colors duration-500 text-foreground">
-            Hi, I'm {/* Updated gradient to use new color palette */}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Ajay Nichani</span>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 transition-colors duration-500 text-white">
+            Hi, I'm
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+              Ajay Nichani
+            </span>
           </h1>
 
-          <h2 className="text-2xl md:text-3xl font-medium mb-8 transition-colors duration-500 text-muted-foreground">
+          <h2 className="text-2xl md:text-3xl font-medium mb-8 transition-colors duration-500 text-slate-300">
             Full-Stack Product Manager
           </h2>
 
@@ -209,14 +253,14 @@ export default function Portfolio() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               onClick={() => scrollToSection("contact")}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 text-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Get in Touch
             </Button>
             <Button
               onClick={() => scrollToSection("projects")}
               variant="outline"
-              className="px-8 py-3 text-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border-border text-foreground hover:bg-muted hover:border-primary"
+              className="px-8 py-3 text-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border-slate-400 text-white hover:bg-slate-800 hover:border-blue-400"
             >
               View My Work
             </Button>
@@ -229,7 +273,7 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 transition-colors duration-500 text-foreground">
-              Products & Projects
+              Products I've Built
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
           </div>
@@ -238,6 +282,11 @@ export default function Portfolio() {
             {/* MathStack AI */}
             <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background">
               <CardContent className="p-8">
+                <img
+                  src="/mathstack-logo.png"
+                  alt="MathStack AI Logo"
+                  className="w-16 h-16 mb-4 rounded-lg object-contain"
+                />
                 <a
                   href="https://mathstackai.app"
                   target="_blank"
@@ -266,73 +315,265 @@ export default function Portfolio() {
               </CardContent>
             </Card>
 
-            {/* InterRoom */}
+            {/* PickTrckr */}
             <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background">
               <CardContent className="p-8">
+                <img
+                  src="/picktrckr-logo.png"
+                  alt="PickTrckr Logo"
+                  className="w-16 h-16 mb-4 rounded-lg object-contain"
+                />
                 <a
-                  href="https://interroom.me"
+                  href="https://v0-nfl-betting-app-beta.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block hover:opacity-80 transition-opacity"
                 >
                   <h3 className="text-2xl font-semibold mb-4 transition-colors duration-500 text-foreground">
-                    InterRoom
+                    PickTrckr
                   </h3>
                 </a>
-                <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
-                  An HR SaaS platform featuring a comprehensive client portal and job tracker, streamlining recruitment
-                  processes for enterprise clients.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-accent/10 text-accent hover:scale-105 transition-transform">SaaS</Badge>
-                  <Badge className="bg-accent/10 text-accent hover:scale-105 transition-transform">HR Tech</Badge>
-                  <Badge className="bg-accent/10 text-accent hover:scale-105 transition-transform">React</Badge>
-                  <Badge className="bg-accent/10 text-accent hover:scale-105 transition-transform">Firebase</Badge>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Behavioral Interview App */}
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold mb-4 transition-colors duration-500 text-foreground">
-                  Behavioral Interview App
-                </h3>
-                <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
-                  A mobile application designed to improve math skills through behavioral science principles, making
-                  learning engaging and effective.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform">Mobile App</Badge>
-                  <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform">EdTech</Badge>
-                  <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform">
-                    Gamification
-                  </Badge>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* NFL Pick 'Em App */}
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold mb-4 transition-colors duration-500 text-foreground">
-                  NFL Pick 'Em App
-                </h3>
                 <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
                   A web application for friends to compete in NFL weekly pick'em pools, featuring real-time scoring and
                   social competition.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-accent/10 text-accent hover:scale-105 transition-transform">Web App</Badge>
-                  <Badge className="bg-accent/10 text-accent hover:scale-105 transition-transform">
+                  <Badge className="bg-accent/20 text-accent-foreground hover:scale-105 transition-transform">
+                    Web App
+                  </Badge>
+                  <Badge className="bg-accent/20 text-accent-foreground hover:scale-105 transition-transform">
                     End-to-End Development
                   </Badge>
-                  <Badge className="bg-accent/10 text-accent hover:scale-105 transition-transform">
+                  <Badge className="bg-accent/20 text-accent-foreground hover:scale-105 transition-transform">
                     Monetization (Stripe)
                   </Badge>
                 </div>
               </CardContent>
             </Card>
+
+            {/* Coming Soon */}
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background border-2 border-dashed border-muted-foreground/30">
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 mb-4 mx-auto rounded-lg bg-muted flex items-center justify-center">
+                  <Lightbulb className="h-8 w-8 text-muted-foreground" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-4 transition-colors duration-500 text-foreground">
+                  More Coming Soon
+                </h3>
+                <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
+                  Exciting new projects are in development. Stay tuned for innovative solutions that will push the
+                  boundaries of technology and user experience.
+                </p>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  <Badge className="bg-muted text-muted-foreground hover:scale-105 transition-transform">
+                    Innovation
+                  </Badge>
+                  <Badge className="bg-muted text-muted-foreground hover:scale-105 transition-transform">
+                    In Progress
+                  </Badge>
+                  <Badge className="bg-muted text-muted-foreground hover:scale-105 transition-transform">
+                    Stay Tuned
+                  </Badge>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Professional Experience subsection with modal dialogs */}
+          <div className="mt-24">
+            <div className="text-center mb-16">
+              <h3 className="text-3xl font-bold mb-4 transition-colors duration-500 text-foreground">
+                Professional Experience
+              </h3>
+              <div className="w-16 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+            </div>
+
+            <div className="grid md:grid-cols-1 gap-8 max-w-4xl mx-auto">
+              {/* Shopkick Card */}
+              <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background">
+                <CardContent className="p-8">
+                  <h4 className="text-2xl font-semibold mb-2 text-foreground">Digital Receipts Product Line</h4>
+                  <h5 className="text-lg text-primary mb-4 font-medium">Shopkick</h5>
+                  <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
+                    Led the development of a major new feature to drive user engagement by rewarding users for any
+                    purchase.
+                  </p>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className="mt-2 bg-background border-border text-foreground hover:bg-muted"
+                      >
+                        View Details
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[425px]">
+                      <DialogHeader>
+                        <DialogTitle>Shopkick - Digital Receipts</DialogTitle>
+                        <DialogDescription>
+                          A product line designed to increase purchase conversion and user retention.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="grid gap-4 py-4 text-left">
+                        <div>
+                          <h4 className="font-semibold mb-1">Problem</h4>
+                          <p className="text-sm text-muted-foreground">
+                            Users wanted more ways to earn rewards, and the business needed a scalable way to validate
+                            purchases from any store.
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Actions</h4>
+                          <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                            <li>Conducted user interviews to define key pain points and feature requirements.</li>
+                            <li>Developed a prioritized roadmap and wrote PRDs for the engineering team.</li>
+                            <li>Collaborated with marketing on a successful go-to-market strategy.</li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Impact</h4>
+                          <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                            <li>
+                              Increased purchase conversion by <strong>30% YoY</strong>.
+                            </li>
+                            <li>
+                              Drove a <strong>25% increase</strong> in weekly active users.
+                            </li>
+                            <li>
+                              The Targeted Video Advertising platform built on this feature generated{" "}
+                              <strong>$10M ARR</strong>.
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </CardContent>
+              </Card>
+
+              <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background">
+                <CardContent className="p-8">
+                  <h4 className="text-2xl font-semibold mb-2 text-foreground">HR SaaS Platform</h4>
+                  <h5 className="text-lg text-primary mb-4 font-medium">InterRoom</h5>
+                  <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
+                    Led product development for a comprehensive HR SaaS platform featuring a client portal and job
+                    tracker.
+                  </p>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="outline" className="mt-2 bg-transparent">
+                        View Details
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[425px]">
+                      <DialogHeader>
+                        <DialogTitle>InterRoom - HR SaaS Platform</DialogTitle>
+                        <DialogDescription>
+                          Streamlining enterprise recruitment through a unified client and candidate management system.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="grid gap-4 py-4 text-left">
+                        <div>
+                          <h4 className="font-semibold mb-1">Problem</h4>
+                          <p className="text-sm text-muted-foreground">
+                            Enterprise HR teams were struggling with fragmented systems, leading to inefficient hiring
+                            processes and a poor candidate experience.
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Actions</h4>
+                          <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                            <li>Drove the product strategy from concept to launch, focusing on user-centric design.</li>
+                            <li>
+                              Managed a cross-functional team of engineers and designers to build and iterate on the
+                              platform.
+                            </li>
+                            <li>
+                              Defined and analyzed key metrics to inform the product roadmap and feature prioritization.
+                            </li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Impact</h4>
+                          <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                            <li>
+                              Reduced time-to-hire by <strong>40%</strong> for initial enterprise clients.
+                            </li>
+                            <li>
+                              Achieved a <strong>95% user satisfaction rate</strong> based on client feedback surveys.
+                            </li>
+                            <li>
+                              Secured <strong>$500k in seed funding</strong> based on the initial product traction.
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </CardContent>
+              </Card>
+
+              {/* NimbleRx Card */}
+              <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background">
+                <CardContent className="p-8">
+                  <h4 className="text-2xl font-semibold mb-2 text-foreground">Healthcare Technology Solutions</h4>
+                  <h5 className="text-lg text-primary mb-4 font-medium">NimbleRx</h5>
+                  <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
+                    Managed product development for healthcare technology solutions focused on improving patient
+                    experience and operational efficiency.
+                  </p>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className="mt-2 bg-background border-border text-foreground hover:bg-muted"
+                      >
+                        View Details
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[425px]">
+                      <DialogHeader>
+                        <DialogTitle>NimbleRx - Healthcare Technology</DialogTitle>
+                        <DialogDescription>
+                          Product solutions for improving healthcare delivery and patient outcomes.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="grid gap-4 py-4 text-left">
+                        <div>
+                          <h4 className="font-semibold mb-1">Problem</h4>
+                          <p className="text-sm text-muted-foreground">
+                            Healthcare providers needed better technology solutions to improve patient experience and
+                            streamline operations.
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Actions</h4>
+                          <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                            <li>Collaborated with healthcare professionals to define product requirements.</li>
+                            <li>Led cross-functional teams to deliver patient-focused solutions.</li>
+                            <li>Implemented data-driven approaches to improve operational efficiency.</li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Impact</h4>
+                          <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                            <li>
+                              Improved patient satisfaction scores by <strong>40%</strong>.
+                            </li>
+                            <li>
+                              Reduced operational costs by <strong>20%</strong> through process optimization.
+                            </li>
+                            <li>
+                              Successfully launched <strong>3 major product features</strong> on schedule.
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
@@ -356,6 +597,11 @@ export default function Portfolio() {
                   {/* Left side - Date */}
                   <div className="w-1/2 pr-8 text-right">
                     <p className="text-lg font-medium text-muted-foreground">2024 - Present</p>
+                    <div className="flex justify-end pt-2">
+                      <div className="p-2 rounded-full bg-primary/10">
+                        <Lightbulb className="h-4 w-4 text-primary" />
+                      </div>
+                    </div>
                   </div>
 
                   {/* Center circle */}
@@ -394,6 +640,11 @@ export default function Portfolio() {
                   {/* Left side - Date */}
                   <div className="w-1/2 pr-8 text-right">
                     <p className="text-lg font-medium text-muted-foreground">2023 - Present</p>
+                    <div className="flex justify-end pt-2">
+                      <div className="p-2 rounded-full bg-accent/10">
+                        <Building className="h-4 w-4 text-accent" />
+                      </div>
+                    </div>
                   </div>
 
                   {/* Center circle */}
@@ -432,6 +683,11 @@ export default function Portfolio() {
                   {/* Left side - Date */}
                   <div className="w-1/2 pr-8 text-right">
                     <p className="text-lg font-medium text-muted-foreground">2022</p>
+                    <div className="flex justify-end pt-2">
+                      <div className="p-2 rounded-full bg-primary/10">
+                        <Heart className="h-4 w-4 text-primary" />
+                      </div>
+                    </div>
                   </div>
 
                   {/* Center circle */}
@@ -470,6 +726,11 @@ export default function Portfolio() {
                   {/* Left side - Date */}
                   <div className="w-1/2 pr-8 text-right">
                     <p className="text-lg font-medium text-muted-foreground">2017 - 2022</p>
+                    <div className="flex justify-end pt-2">
+                      <div className="p-2 rounded-full bg-accent/10">
+                        <ShoppingBag className="h-4 w-4 text-accent" />
+                      </div>
+                    </div>
                   </div>
 
                   {/* Center circle */}
@@ -532,7 +793,7 @@ export default function Portfolio() {
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Button
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 py-4 text-lg font-medium flex items-center gap-3 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="bg-primary hover:bg-primary/90 text-white px-10 py-4 text-lg font-medium flex items-center gap-3 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
               onClick={() => window.open("mailto:ajay@example.com", "_blank")}
             >
               <Mail size={20} />
