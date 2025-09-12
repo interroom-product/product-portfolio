@@ -37,7 +37,7 @@ export function Typewriter({ phrases, typingSpeed = 100, deletingSpeed = 50, del
   }, [text, isDeleting, phraseIndex, phrases, typingSpeed, deletingSpeed, delay])
 
   return (
-    <span className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 font-normal">
+    <span className="text-xl md:text-2xl text-slate-300 font-mono font-medium drop-shadow-md">
       {text}
       <span className="animate-pulse">|</span>
     </span>

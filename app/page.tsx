@@ -1,19 +1,14 @@
 "use client"
 
+import { DialogTrigger } from "@/components/ui/dialog"
+
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
 import { Typewriter } from "@/components/ui/typewriter"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogDescription,
-} from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import {
   Menu,
   X,
@@ -33,6 +28,7 @@ import {
   Building,
   Heart,
   ShoppingBag,
+  FlaskConical,
 } from "lucide-react"
 
 export default function Portfolio() {
@@ -43,7 +39,7 @@ export default function Portfolio() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "projects", "experience", "contact"]
+      const sections = ["home", "case-studies", "experience", "experiments", "contact"]
       const scrollPosition = window.scrollY + 100
       setIsScrolled(window.scrollY > 50)
 
@@ -99,8 +95,9 @@ export default function Portfolio() {
 
   const navItems = [
     { id: "home", label: "Home" },
-    { id: "projects", label: "Products" },
+    { id: "case-studies", label: "Case Studies" },
     { id: "experience", label: "Experience" },
+    { id: "experiments", label: "Experiments" },
     { id: "contact", label: "Contact" },
   ]
 
@@ -113,17 +110,17 @@ export default function Portfolio() {
       {/* Navigation */}
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-          isScrolled ? "bg-white/90 backdrop-blur-md border-b border-gray-200" : "bg-transparent"
+          isScrolled
+            ? "bg-white/90 backdrop-blur-md border-b border-gray-200 dark:bg-gray-900/90 dark:border-gray-700"
+            : "bg-transparent"
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div
-              className="font-medium text-xl transition-colors duration-500 flex items-center gap-3"
-              style={{
-                color: isScrolled ? "#1f2937" : "#ffffff",
-                textShadow: isScrolled ? "none" : "0 2px 4px rgba(0,0,0,0.5)",
-              }}
+              className={`font-medium text-xl transition-colors duration-500 flex items-center gap-3 ${
+                isScrolled ? "text-gray-900 dark:text-white" : "text-white drop-shadow-md"
+              }`}
             >
               <img src="/memoji.png" alt="Ajay Nichani Memoji" className="w-10 h-10 rounded-full" />
               Ajay Nichani
@@ -135,18 +132,15 @@ export default function Portfolio() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-sm font-medium transition-all duration-300 hover:scale-105"
-                  style={{
-                    color: isScrolled
+                  className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                    isScrolled
                       ? activeSection === item.id
-                        ? "#3b82f6"
-                        : "#6b7280"
+                        ? "text-blue-600 font-semibold dark:text-blue-400"
+                        : "text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
                       : activeSection === item.id
-                        ? "#ffffff"
-                        : "rgba(255,255,255,0.9)",
-                    textShadow: isScrolled ? "none" : "0 2px 4px rgba(0,0,0,0.5)",
-                    fontWeight: activeSection === item.id ? "600" : "500",
-                  }}
+                        ? "text-white font-semibold drop-shadow-md"
+                        : "text-white/90 hover:text-white drop-shadow-md"
+                  }`}
                 >
                   {item.label}
                 </button>
@@ -155,19 +149,15 @@ export default function Portfolio() {
               {/* Dark Mode Toggle */}
               <div className="flex items-center space-x-3">
                 <Sun
-                  className="h-4 w-4 transition-colors"
-                  style={{
-                    color: isScrolled ? "#f59e0b" : "rgba(255,255,255,0.8)",
-                    filter: isScrolled ? "none" : "drop-shadow(0 2px 4px rgba(0,0,0,0.5))",
-                  }}
+                  className={`h-4 w-4 transition-colors ${
+                    isScrolled ? "text-yellow-500 dark:text-yellow-400" : "text-white/80 drop-shadow-md"
+                  }`}
                 />
                 <Switch checked={isDarkMode} onCheckedChange={toggleDarkMode} />
                 <Moon
-                  className="h-4 w-4 transition-colors"
-                  style={{
-                    color: isScrolled ? "#6b7280" : "rgba(255,255,255,0.8)",
-                    filter: isScrolled ? "none" : "drop-shadow(0 2px 4px rgba(0,0,0,0.5))",
-                  }}
+                  className={`h-4 w-4 transition-colors ${
+                    isScrolled ? "text-gray-600 dark:text-gray-300" : "text-white/80 drop-shadow-md"
+                  }`}
                 />
               </div>
             </div>
@@ -176,28 +166,24 @@ export default function Portfolio() {
             <div className="md:hidden flex items-center space-x-4">
               <div className="flex items-center space-x-3">
                 <Sun
-                  className="h-4 w-4 transition-colors"
-                  style={{
-                    color: isScrolled ? "#f59e0b" : "rgba(255,255,255,0.8)",
-                    filter: isScrolled ? "none" : "drop-shadow(0 2px 4px rgba(0,0,0,0.5))",
-                  }}
+                  className={`h-4 w-4 transition-colors ${
+                    isScrolled ? "text-yellow-500 dark:text-yellow-400" : "text-white/80 drop-shadow-md"
+                  }`}
                 />
                 <Switch checked={isDarkMode} onCheckedChange={toggleDarkMode} />
                 <Moon
-                  className="h-4 w-4 transition-colors"
-                  style={{
-                    color: isScrolled ? "#6b7280" : "rgba(255,255,255,0.8)",
-                    filter: isScrolled ? "none" : "drop-shadow(0 2px 4px rgba(0,0,0,0.5))",
-                  }}
+                  className={`h-4 w-4 transition-colors ${
+                    isScrolled ? "text-gray-600 dark:text-gray-300" : "text-white/80 drop-shadow-md"
+                  }`}
                 />
               </div>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="transition-colors"
-                style={{
-                  color: isScrolled ? "#6b7280" : "rgba(255,255,255,0.9)",
-                  filter: isScrolled ? "none" : "drop-shadow(0 2px 4px rgba(0,0,0,0.5))",
-                }}
+                className={`transition-colors ${
+                  isScrolled
+                    ? "text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                    : "text-white/90 hover:text-white drop-shadow-md"
+                }`}
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -207,15 +193,16 @@ export default function Portfolio() {
           {/* Mobile Navigation */}
           {isMenuOpen && (
             <div className="md:hidden">
-              <div className="px-4 pt-4 pb-6 space-y-3 border-t bg-white/95 border-gray-200">
+              <div className="px-4 pt-4 pb-6 space-y-3 border-t bg-white/95 dark:bg-gray-900/95 border-gray-200 dark:border-gray-700">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className="block px-4 py-3 text-base font-medium transition-colors"
-                    style={{
-                      color: activeSection === item.id ? "#3b82f6" : "#6b7280",
-                    }}
+                    className={`block px-4 py-3 text-base font-medium transition-colors w-full text-left ${
+                      activeSection === item.id
+                        ? "text-blue-600 dark:text-blue-400 font-semibold"
+                        : "text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                    }`}
                   >
                     {item.label}
                   </button>
@@ -235,16 +222,20 @@ export default function Portfolio() {
         }}
       >
         <div className="text-center max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 transition-colors duration-500 text-white">
-            Hi, I'm
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 transition-colors duration-500 text-white drop-shadow-lg">
+            Hi, I'm{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
               Ajay Nichani
             </span>
           </h1>
 
-          <h2 className="text-2xl md:text-3xl font-medium mb-8 transition-colors duration-500 text-slate-300">
+          <h2 className="text-2xl md:text-3xl font-medium mb-4 transition-colors duration-500 text-slate-200 drop-shadow-md">
             Full-Stack Product Manager
           </h2>
+
+          <p className="text-lg md:text-xl mb-8 transition-colors duration-500 text-slate-300 max-w-3xl mx-auto drop-shadow-md">
+            I build products at the intersection of AI and strategy — from 0→1 experimentation to scaling growth.
+          </p>
 
           <div className="mb-12 flex justify-center">
             <Typewriter phrases={typewriterPhrases} />
@@ -258,9 +249,9 @@ export default function Portfolio() {
               Get in Touch
             </Button>
             <Button
-              onClick={() => scrollToSection("projects")}
+              onClick={() => scrollToSection("case-studies")}
               variant="outline"
-              className="px-8 py-3 text-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border-slate-400 text-white hover:bg-slate-800 hover:border-blue-400"
+              className="px-8 py-3 text-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border-slate-300 text-white hover:bg-white/10 hover:border-blue-400 backdrop-blur-sm"
             >
               View My Work
             </Button>
@@ -268,13 +259,68 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-24 transition-colors duration-500 opacity-0 bg-card">
+      <section className="py-24 transition-colors duration-500 opacity-0 bg-background">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 transition-colors duration-500 text-foreground">
-              Products I've Built
+              Where I Add Value
             </h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Generative AI Card */}
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-card">
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 mb-6 mx-auto rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Lightbulb className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-4 text-foreground">Generative AI</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>• LLM Apps</li>
+                  <li>• AI-Powered Workflows</li>
+                  <li>• Experimentation</li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* Product Management Card */}
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-card">
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 mb-6 mx-auto rounded-lg bg-accent/10 flex items-center justify-center">
+                  <Briefcase className="h-8 w-8 text-accent" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-4 text-foreground">Product Management</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>• Roadmaps</li>
+                  <li>• Discovery</li>
+                  <li>• Execution</li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* Product Strategy Card */}
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-card">
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 mb-6 mx-auto rounded-lg bg-primary/10 flex items-center justify-center">
+                  <BarChart3 className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-4 text-foreground">Product Strategy</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>• Growth</li>
+                  <li>• Go-to-Market Strategy</li>
+                  <li>• A/B Testing</li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section id="case-studies" className="py-24 transition-colors duration-500 opacity-0 bg-card">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 transition-colors duration-500 text-foreground">Case Studies</h2>
             <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
           </div>
 
@@ -778,6 +824,93 @@ export default function Portfolio() {
         </div>
       </section>
 
+      <section id="experiments" className="py-24 transition-colors duration-500 opacity-0 bg-card">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 transition-colors duration-500 text-foreground">
+              Experiments & Playground
+            </h2>
+            <p className="text-xl text-muted-foreground mb-8">Exploring what's possible with emerging technology.</p>
+            <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background border-2 border-dashed border-muted-foreground/30">
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 mb-4 mx-auto rounded-lg bg-muted flex items-center justify-center">
+                  <FlaskConical className="h-8 w-8 text-muted-foreground" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-4 transition-colors duration-500 text-foreground">
+                  Coming Soon
+                </h3>
+                <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
+                  Exciting experiments with AI, automation, and emerging technologies are in development.
+                </p>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  <Badge className="bg-muted text-muted-foreground hover:scale-105 transition-transform">
+                    AI Research
+                  </Badge>
+                  <Badge className="bg-muted text-muted-foreground hover:scale-105 transition-transform">
+                    Prototyping
+                  </Badge>
+                  <Badge className="bg-muted text-muted-foreground hover:scale-105 transition-transform">
+                    Innovation
+                  </Badge>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 transition-colors duration-500 opacity-0 bg-background">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 transition-colors duration-500 text-foreground">My Toolkit</h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+          </div>
+
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+            <div className="flex flex-col items-center group">
+              <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                <img src="/figma-logo.png" alt="Figma" className="w-8 h-8" />
+              </div>
+              <span className="text-sm text-muted-foreground">Figma</span>
+            </div>
+            <div className="flex flex-col items-center group">
+              <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                <img src="/notion-logo.png" alt="Notion" className="w-8 h-8" />
+              </div>
+              <span className="text-sm text-muted-foreground">Notion</span>
+            </div>
+            <div className="flex flex-col items-center group">
+              <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                <img src="/supabase-logo.png" alt="Supabase" className="w-8 h-8" />
+              </div>
+              <span className="text-sm text-muted-foreground">Supabase</span>
+            </div>
+            <div className="flex flex-col items-center group">
+              <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                <img src="/gemini-ai-logo.jpg" alt="Gemini" className="w-8 h-8" />
+              </div>
+              <span className="text-sm text-muted-foreground">Gemini</span>
+            </div>
+            <div className="flex flex-col items-center group">
+              <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                <img src="/openai-logo-inspired-abstract.png" alt="OpenAI" className="w-8 h-8" />
+              </div>
+              <span className="text-sm text-muted-foreground">OpenAI</span>
+            </div>
+            <div className="flex flex-col items-center group">
+              <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                <img src="/jira-logo.png" alt="Jira" className="w-8 h-8" />
+              </div>
+              <span className="text-sm text-muted-foreground">Jira</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section
         id="contact"
@@ -806,6 +939,14 @@ export default function Portfolio() {
             >
               <Linkedin size={20} />
               LinkedIn
+            </Button>
+            <Button
+              variant="outline"
+              className="border-border text-foreground hover:bg-muted hover:border-primary px-10 py-4 text-lg font-medium flex items-center gap-3 bg-transparent transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              onClick={() => window.open("https://x.com/aHj_builds", "_blank")}
+            >
+              <X size={20} />
+              Twitter
             </Button>
           </div>
         </div>
