@@ -7,7 +7,6 @@ import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
 import { Typewriter } from "@/components/ui/typewriter"
 import { TweetCard } from "@/components/ui/tweet-card"
-import { XLogo } from "@/components/ui/x-logo"
 import {
   Menu,
   X,
@@ -393,147 +392,165 @@ export default function Portfolio() {
             <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
-            {/* MathStack AI */}
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-card">
-              <CardContent className="p-8">
-                <img
-                  src="/mathstack-logo.png"
-                  alt="MathStack AI Logo"
-                  className="w-16 h-16 mb-4 rounded-lg object-contain"
-                />
-                <a
-                  href="https://mathstackai.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block hover:opacity-80 transition-opacity"
-                >
-                  <h3 className="text-2xl font-semibold mb-4 transition-colors duration-500 text-foreground">
-                    MathStack AI
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Left Column - Projects */}
+            <div className="space-y-8 order-1 lg:order-1">
+              {/* MathStack AI */}
+              <a
+                href="https://mathstackai.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block hover:no-underline"
+              >
+                <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:border hover:border-primary/30 group bg-card cursor-pointer">
+                  <CardContent className="p-4 sm:p-6 md:p-8">
+                    <img
+                      src="/mathstack-logo.png"
+                      alt="MathStack AI Logo"
+                      className="w-12 h-12 sm:w-16 sm:h-16 mb-4 rounded-lg object-contain"
+                    />
+                    <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 transition-colors duration-500 text-foreground group-hover:text-primary">
+                      MathStack AI
+                    </h3>
+                    <p className="mb-4 sm:mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground text-sm sm:text-base">
+                      An AI-powered EdTech platform for mathematics learning that personalizes the educational experience
+                      using advanced machine learning algorithms.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform text-xs sm:text-sm">AI/ML</Badge>
+                      <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform text-xs sm:text-sm">EdTech</Badge>
+                      <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform text-xs sm:text-sm">Next.js</Badge>
+                      <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform text-xs sm:text-sm">
+                        User Accounts
+                      </Badge>
+                      <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform text-xs sm:text-sm">
+                        Database Creation
+                      </Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+              </a>
+
+              {/* PickTrckr */}
+              <a
+                href="https://v0-nfl-betting-app-beta.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block hover:no-underline"
+              >
+                <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:border hover:border-accent/30 group bg-card cursor-pointer">
+                  <CardContent className="p-4 sm:p-6 md:p-8">
+                    <img
+                      src="/picktrckr-logo.png"
+                      alt="PickTrckr Logo"
+                      className="w-12 h-12 sm:w-16 sm:h-16 mb-4 rounded-lg object-contain"
+                    />
+                    <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 transition-colors duration-500 text-foreground group-hover:text-accent">
+                      PickTrckr
+                    </h3>
+                    <p className="mb-4 sm:mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground text-sm sm:text-base">
+                      A web application for friends to compete in NFL weekly pick'em pools, featuring real-time scoring and
+                      social competition.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge className="bg-accent/20 text-accent-foreground hover:scale-105 transition-transform text-xs sm:text-sm">
+                        Web App
+                      </Badge>
+                      <Badge className="bg-accent/20 text-accent-foreground hover:scale-105 transition-transform text-xs sm:text-sm">
+                        End-to-End Development
+                      </Badge>
+                      <Badge className="bg-accent/20 text-accent-foreground hover:scale-105 transition-transform text-xs sm:text-sm">
+                        Monetization (Stripe)
+                      </Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+              </a>
+
+              {/* Coming Soon */}
+              <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-card border-2 border-dashed border-muted-foreground/30">
+                <CardContent className="p-4 sm:p-6 md:p-8 text-center">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 mb-4 mx-auto rounded-lg bg-muted flex items-center justify-center">
+                    <Lightbulb className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground" />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 transition-colors duration-500 text-foreground">
+                    More Coming Soon
                   </h3>
-                </a>
-                <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
-                  An AI-powered EdTech platform for mathematics learning that personalizes the educational experience
-                  using advanced machine learning algorithms.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform">AI/ML</Badge>
-                  <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform">EdTech</Badge>
-                  <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform">Next.js</Badge>
-                  <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform">
-                    User Accounts
-                  </Badge>
-                  <Badge className="bg-primary/10 text-primary hover:scale-105 transition-transform">
-                    Database Creation
-                  </Badge>
-                </div>
-              </CardContent>
-            </Card>
+                  <p className="mb-4 sm:mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground text-sm sm:text-base">
+                    Exciting new projects are in development. Stay tuned for innovative solutions that will push the
+                    boundaries of technology and user experience.
+                  </p>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    <Badge className="bg-muted text-muted-foreground hover:scale-105 transition-transform text-xs sm:text-sm">
+                      Innovation
+                    </Badge>
+                    <Badge className="bg-muted text-muted-foreground hover:scale-105 transition-transform text-xs sm:text-sm">
+                      In Progress
+                    </Badge>
+                    <Badge className="bg-muted text-muted-foreground hover:scale-105 transition-transform text-xs sm:text-sm">
+                      Stay Tuned
+                    </Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
 
-            {/* PickTrckr */}
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-card">
-              <CardContent className="p-8">
-                <img
-                  src="/picktrckr-logo.png"
-                  alt="PickTrckr Logo"
-                  className="w-16 h-16 mb-4 rounded-lg object-contain"
-                />
-                <a
-                  href="https://v0-nfl-betting-app-beta.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block hover:opacity-80 transition-opacity"
-                >
-                  <h3 className="text-2xl font-semibold mb-4 transition-colors duration-500 text-foreground">
-                    PickTrckr
-                  </h3>
-                </a>
-                <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
-                  A web application for friends to compete in NFL weekly pick'em pools, featuring real-time scoring and
-                  social competition.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-accent/20 text-accent-foreground hover:scale-105 transition-transform">
-                    Web App
-                  </Badge>
-                  <Badge className="bg-accent/20 text-accent-foreground hover:scale-105 transition-transform">
-                    End-to-End Development
-                  </Badge>
-                  <Badge className="bg-accent/20 text-accent-foreground hover:scale-105 transition-transform">
-                    Monetization (Stripe)
-                  </Badge>
-                </div>
-              </CardContent>
-            </Card>
+            {/* Right Column - My Toolkit */}
+            <div className="order-2 lg:order-2 mt-8 lg:mt-0">
+              <Card className="border-0 shadow-lg h-full bg-card">
+                <CardContent className="p-4 sm:p-6 md:p-8">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8 text-center transition-colors duration-500 text-foreground">My Toolkit</h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
+                    {/* Figma */}
+                    <div className="flex flex-col items-center group">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 mb-2 sm:mb-3 rounded-lg bg-white shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                        <img src="/figma-logo.png" alt="Figma" className="w-8 h-8 sm:w-12 sm:h-12 object-contain" />
+                      </div>
+                      <span className="text-xs sm:text-sm font-medium text-foreground">Figma</span>
+                    </div>
 
-            {/* Coming Soon */}
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-card border-2 border-dashed border-muted-foreground/30">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 mb-4 mx-auto rounded-lg bg-muted flex items-center justify-center">
-                  <Lightbulb className="h-8 w-8 text-muted-foreground" />
-                </div>
-                <h3 className="text-2xl font-semibold mb-4 transition-colors duration-500 text-foreground">
-                  More Coming Soon
-                </h3>
-                <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
-                  Exciting new projects are in development. Stay tuned for innovative solutions that will push the
-                  boundaries of technology and user experience.
-                </p>
-                <div className="flex flex-wrap gap-2 justify-center">
-                  <Badge className="bg-muted text-muted-foreground hover:scale-105 transition-transform">
-                    Innovation
-                  </Badge>
-                  <Badge className="bg-muted text-muted-foreground hover:scale-105 transition-transform">
-                    In Progress
-                  </Badge>
-                  <Badge className="bg-muted text-muted-foreground hover:scale-105 transition-transform">
-                    Stay Tuned
-                  </Badge>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+                    {/* Notion */}
+                    <div className="flex flex-col items-center group">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 mb-2 sm:mb-3 rounded-lg bg-white shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                        <img src="/notion-logo.png" alt="Notion" className="w-8 h-8 sm:w-12 sm:h-12 object-contain" />
+                      </div>
+                      <span className="text-xs sm:text-sm font-medium text-foreground">Notion</span>
+                    </div>
 
-          {/* My Toolkit Section */}
-          <div className="mb-8">
-            <h3 className="text-2xl font-bold mb-8 text-center transition-colors duration-500 text-foreground">My Toolkit</h3>
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-              <div className="flex flex-col items-center group">
-                <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
-                  <img src="/figma-logo.png" alt="Figma" className="w-8 h-8" />
-                </div>
-                <span className="text-sm text-muted-foreground">Figma</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
-                  <img src="/notion-logo.png" alt="Notion" className="w-8 h-8" />
-                </div>
-                <span className="text-sm text-muted-foreground">Notion</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
-                  <img src="/supabase-logo.png" alt="Supabase" className="w-8 h-8" />
-                </div>
-                <span className="text-sm text-muted-foreground">Supabase</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
-                  <img src="/gemini-ai-logo.jpg" alt="Gemini" className="w-8 h-8" />
-                </div>
-                <span className="text-sm text-muted-foreground">Gemini</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
-                  <img src="/openai-logo-inspired-abstract.png" alt="OpenAI" className="w-8 h-8" />
-                </div>
-                <span className="text-sm text-muted-foreground">OpenAI</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
-                  <img src="/jira-logo.png" alt="Jira" className="w-8 h-8" />
-                </div>
-                <span className="text-sm text-muted-foreground">Jira</span>
-              </div>
+                    {/* Supabase */}
+                    <div className="flex flex-col items-center group">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 mb-2 sm:mb-3 rounded-lg bg-white shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                        <img src="/supabase-logo.png" alt="Supabase" className="w-8 h-8 sm:w-12 sm:h-12 object-contain" />
+                      </div>
+                      <span className="text-xs sm:text-sm font-medium text-foreground">Supabase</span>
+                    </div>
+
+                    {/* Gemini */}
+                    <div className="flex flex-col items-center group">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 mb-2 sm:mb-3 rounded-lg bg-white shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                        <img src="/gemini-ai-logo.jpg" alt="Gemini" className="w-8 h-8 sm:w-12 sm:h-12 object-contain" />
+                      </div>
+                      <span className="text-xs sm:text-sm font-medium text-foreground">Gemini</span>
+                    </div>
+
+                    {/* OpenAI */}
+                    <div className="flex flex-col items-center group">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 mb-2 sm:mb-3 rounded-lg bg-white shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                        <img src="/openai-logo-inspired-abstract.png" alt="OpenAI" className="w-8 h-8 sm:w-12 sm:h-12 object-contain" />
+                      </div>
+                      <span className="text-xs sm:text-sm font-medium text-foreground">OpenAI</span>
+                    </div>
+
+                    {/* Jira */}
+                    <div className="flex flex-col items-center group">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 mb-2 sm:mb-3 rounded-lg bg-white shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                        <img src="/jira-logo.png" alt="Jira" className="w-8 h-8 sm:w-12 sm:h-12 object-contain" />
+                      </div>
+                      <span className="text-xs sm:text-sm font-medium text-foreground">Jira</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
@@ -762,97 +779,33 @@ export default function Portfolio() {
         </div>
       </section>
 
-      <section className="py-24 transition-colors duration-500 opacity-0 bg-background">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 transition-colors duration-500 text-foreground">My Toolkit</h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
-          </div>
-
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-            <div className="flex flex-col items-center group">
-              <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
-                <img src="/figma-logo.png" alt="Figma" className="w-8 h-8" />
-              </div>
-              <span className="text-sm text-muted-foreground">Figma</span>
-            </div>
-            <div className="flex flex-col items-center group">
-              <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
-                <img src="/notion-logo.png" alt="Notion" className="w-8 h-8" />
-              </div>
-              <span className="text-sm text-muted-foreground">Notion</span>
-            </div>
-            <div className="flex flex-col items-center group">
-              <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
-                <img src="/supabase-logo.png" alt="Supabase" className="w-8 h-8" />
-              </div>
-              <span className="text-sm text-muted-foreground">Supabase</span>
-            </div>
-            <div className="flex flex-col items-center group">
-              <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
-                <img src="/gemini-ai-logo.jpg" alt="Gemini" className="w-8 h-8" />
-              </div>
-              <span className="text-sm text-muted-foreground">Gemini</span>
-            </div>
-            <div className="flex flex-col items-center group">
-              <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
-                <img src="/openai-logo-inspired-abstract.png" alt="OpenAI" className="w-8 h-8" />
-              </div>
-              <span className="text-sm text-muted-foreground">OpenAI</span>
-            </div>
-            <div className="flex flex-col items-center group">
-              <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
-                <img src="/jira-logo.png" alt="Jira" className="w-8 h-8" />
-              </div>
-              <span className="text-sm text-muted-foreground">Jira</span>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Contact Section */}
       <section
         id="contact"
         className="py-24 relative overflow-hidden opacity-0 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20"
       >
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 relative z-10">
-          {/* Chat bubble */}
-          <div className="flex justify-end mb-6">
-            <div className="bg-primary text-white px-6 py-4 rounded-2xl rounded-br-sm max-w-md shadow-lg">
-              <p className="text-lg font-medium">Ready to build something great together?</p>
-            </div>
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-14">
+            <h2 className="text-4xl font-bold mb-4 transition-colors duration-500 text-foreground">Get In Touch</h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+            <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">Ready to build something great together? Connect with me through any of these channels.</p>
           </div>
-
-          {/* Chat input form */}
-          <div className="mb-12">
-            <div className="bg-white dark:bg-card rounded-2xl shadow-xl border border-border p-4 flex items-center gap-4">
-              <input
-                type="text"
-                placeholder="Let's connect..."
-                className="flex-1 bg-transparent border-none outline-none text-lg placeholder:text-muted-foreground text-foreground"
-                readOnly
-              />
-              <Button
-                size="sm"
-                className="bg-primary hover:bg-primary/90 text-white rounded-full p-3 shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                <Send size={18} />
-              </Button>
-            </div>
-          </div>
-
+          
           {/* Contact cards grid */}
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Email Card */}
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 bg-white dark:bg-card">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 mb-4 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:border hover:border-primary/30 bg-white dark:bg-card">
+              <CardContent className="p-8 flex flex-col items-center text-center h-full justify-between">
+                <div className="w-16 h-16 mb-5 rounded-full bg-primary/10 flex items-center justify-center">
                   <Mail className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-foreground">Email Me</h3>
-                <p className="text-muted-foreground mb-6">ajay@example.com</p>
+                <div className="flex-1 flex flex-col items-center justify-center my-4">
+                  <h3 className="text-xl font-semibold mb-3 text-foreground">Email Me</h3>
+                  <p className="text-muted-foreground mb-6">Have a project in mind or want to connect? Send me a message.</p>
+                </div>
                 <Button
-                  className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-all duration-300"
+                  className="bg-primary hover:bg-primary/90 text-white w-full px-4 py-2 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
                   onClick={() => window.open("mailto:ajay@example.com", "_blank")}
                 >
                   Send Email
@@ -860,18 +813,46 @@ export default function Portfolio() {
               </CardContent>
             </Card>
 
-            {/* Twitter Card - Using TweetCard */}
-            <div className="flex flex-col h-full">
-              <TweetCard />
-              <Button
-                variant="outline"
-                className="mt-4 border-accent text-accent hover:bg-accent hover:text-white px-6 py-2 rounded-lg transition-all duration-300"
-                onClick={() => window.open("https://x.com/aHj_builds", "_blank")}
-              >
-                <XLogo className="mr-2 h-5 w-5" />
-                Follow Me
-              </Button>
-            </div>
+            {/* LinkedIn Card */}
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:border hover:border-blue-400/30 bg-white dark:bg-card">
+              <CardContent className="p-8 flex flex-col items-center text-center h-full justify-between">
+                <div className="w-16 h-16 mb-5 rounded-full bg-blue-500/10 flex items-center justify-center">
+                  <Linkedin className="h-8 w-8 text-blue-500" />
+                </div>
+                <div className="flex-1 flex flex-col items-center justify-center my-4">
+                  <h3 className="text-xl font-semibold mb-3 text-foreground">Connect on LinkedIn</h3>
+                  <p className="text-muted-foreground mb-6">Let's build our professional network.</p>
+                </div>
+                <Button
+                  variant="outline"
+                  className="border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-full px-4 py-2 rounded-lg transition-all duration-300"
+                  onClick={() => window.open("https://linkedin.com/in/ajay-nichani", "_blank")}
+                >
+                  View Profile
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* X / Twitter Card */}
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:border hover:border-accent/30 bg-white dark:bg-card">
+              <CardContent className="p-8 flex flex-col items-center text-center h-full justify-between">
+                <div className="w-16 h-16 mb-5 rounded-full bg-accent/10 flex items-center justify-center">
+                  <img src="/x-logo.svg" alt="X Logo" className="h-8 w-8 object-contain" />
+                </div>
+                <div className="flex-1 flex flex-col items-center justify-center my-4">
+                  <h3 className="text-xl font-semibold mb-3 text-foreground">Follow on X</h3>
+                  <p className="text-muted-foreground mb-6">@aHj_builds</p>
+                </div>
+                <Button
+                  variant="outline"
+                  className="border-accent text-accent hover:bg-accent hover:text-white w-full px-4 py-2 rounded-lg transition-all duration-300"
+                  onClick={() => window.open("https://x.com/aHj_builds", "_blank")}
+                >
+                  <img src="/x-logo.svg" alt="X Logo" className="mr-2 h-5 w-5 object-contain" />
+                  Follow Me
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
