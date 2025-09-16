@@ -6,6 +6,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
 import { Typewriter } from "@/components/ui/typewriter"
+import { TweetCard } from "@/components/ui/tweet-card"
+import { XLogo } from "@/components/ui/x-logo"
 import {
   Menu,
   X,
@@ -26,6 +28,8 @@ import {
   Heart,
   ShoppingBag,
   Code,
+  ArrowUpRight,
+  Send,
 } from "lucide-react"
 
 export default function Portfolio() {
@@ -325,141 +329,55 @@ export default function Portfolio() {
             <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid md:grid-cols-1 gap-8 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8">
             {/* Shopkick Case Study */}
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background relative cursor-pointer">
               <CardContent className="p-8">
+                <ArrowUpRight className="absolute top-6 right-6 h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 <h4 className="text-2xl font-semibold mb-2 text-foreground">Digital Receipts Product Line</h4>
                 <h5 className="text-lg text-primary mb-4 font-medium">Shopkick</h5>
-                <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
-                  Led the development of a major new feature to drive user engagement by rewarding users for any
-                  purchase.
+                <p className="leading-relaxed transition-colors duration-500 text-muted-foreground">
+                  Led development of a scalable rewards system that increased purchase conversion by 30% YoY and generated $10M ARR.
                 </p>
-
-                <div className="grid gap-4 py-4 text-left">
-                  <div>
-                    <h4 className="font-semibold mb-1">Problem</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Users wanted more ways to earn rewards, and the business needed a scalable way to validate
-                      purchases from any store.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Actions</h4>
-                    <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                      <li>Conducted user interviews to define key pain points and feature requirements.</li>
-                      <li>Developed a prioritized roadmap and wrote PRDs for the engineering team.</li>
-                      <li>Collaborated with marketing on a successful go-to-market strategy.</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Impact</h4>
-                    <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                      <li>
-                        Increased purchase conversion by <strong>30% YoY</strong>.
-                      </li>
-                      <li>
-                        Drove a <strong>25% increase</strong> in weekly active users.
-                      </li>
-                      <li>
-                        The Targeted Video Advertising platform built on this feature generated{" "}
-                        <strong>$10M ARR</strong>.
-                      </li>
-                    </ul>
-                  </div>
-                </div>
               </CardContent>
             </Card>
 
             {/* InterRoom Case Study */}
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background relative cursor-pointer">
               <CardContent className="p-8">
+                <ArrowUpRight className="absolute top-6 right-6 h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 <h4 className="text-2xl font-semibold mb-2 text-foreground">HR SaaS Platform</h4>
                 <h5 className="text-lg text-primary mb-4 font-medium">InterRoom</h5>
-                <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
-                  Led product development for a comprehensive HR SaaS platform featuring a client portal and job
-                  tracker.
+                <p className="leading-relaxed transition-colors duration-500 text-muted-foreground">
+                  Built comprehensive HR platform that reduced time-to-hire by 40% and achieved 95% user satisfaction rate.
                 </p>
-
-                <div className="grid gap-4 py-4 text-left">
-                  <div>
-                    <h4 className="font-semibold mb-1">Problem</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Enterprise HR teams were struggling with fragmented systems, leading to inefficient hiring
-                      processes and a poor candidate experience.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Actions</h4>
-                    <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                      <li>Drove the product strategy from concept to launch, focusing on user-centric design.</li>
-                      <li>
-                        Managed a cross-functional team of engineers and designers to build and iterate on the platform.
-                      </li>
-                      <li>
-                        Defined and analyzed key metrics to inform the product roadmap and feature prioritization.
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Impact</h4>
-                    <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                      <li>
-                        Reduced time-to-hire by <strong>40%</strong> for initial enterprise clients.
-                      </li>
-                      <li>
-                        Achieved a <strong>95% user satisfaction rate</strong> based on client feedback surveys.
-                      </li>
-                      <li>
-                        Secured <strong>$500k in seed funding</strong> based on the initial product traction.
-                      </li>
-                    </ul>
-                  </div>
-                </div>
               </CardContent>
             </Card>
 
             {/* NimbleRx Case Study */}
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background relative cursor-pointer">
               <CardContent className="p-8">
+                <ArrowUpRight className="absolute top-6 right-6 h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 <h4 className="text-2xl font-semibold mb-2 text-foreground">Healthcare Technology Solutions</h4>
                 <h5 className="text-lg text-primary mb-4 font-medium">NimbleRx</h5>
-                <p className="mb-6 leading-relaxed transition-colors duration-500 text-muted-foreground">
-                  Managed product development for healthcare technology solutions focused on improving patient
-                  experience and operational efficiency.
+                <p className="leading-relaxed transition-colors duration-500 text-muted-foreground">
+                  Delivered patient-focused solutions that improved satisfaction scores by 40% and reduced operational costs by 20%.
                 </p>
+              </CardContent>
+            </Card>
 
-                <div className="grid gap-4 py-4 text-left">
-                  <div>
-                    <h4 className="font-semibold mb-1">Problem</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Healthcare providers needed better technology solutions to improve patient experience and
-                      streamline operations.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Actions</h4>
-                    <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                      <li>Collaborated with healthcare professionals to define product requirements.</li>
-                      <li>Led cross-functional teams to deliver patient-focused solutions.</li>
-                      <li>Implemented data-driven approaches to improve operational efficiency.</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Impact</h4>
-                    <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                      <li>
-                        Improved patient satisfaction scores by <strong>40%</strong>.
-                      </li>
-                      <li>
-                        Reduced operational costs by <strong>20%</strong> through process optimization.
-                      </li>
-                      <li>
-                        Successfully launched <strong>3 major product features</strong> on schedule.
-                      </li>
-                    </ul>
-                  </div>
+            {/* Coming Soon Card */}
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-background relative cursor-pointer border-2 border-dashed border-muted-foreground/30">
+              <CardContent className="p-8 text-center">
+                <ArrowUpRight className="absolute top-6 right-6 h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                <div className="w-16 h-16 mb-4 mx-auto rounded-lg bg-muted flex items-center justify-center">
+                  <Lightbulb className="h-8 w-8 text-muted-foreground" />
                 </div>
+                <h4 className="text-2xl font-semibold mb-2 text-foreground">More Case Studies</h4>
+                <h5 className="text-lg text-muted-foreground mb-4 font-medium">Coming Soon</h5>
+                <p className="leading-relaxed transition-colors duration-500 text-muted-foreground">
+                  Additional detailed case studies showcasing product strategy and execution excellence.
+                </p>
               </CardContent>
             </Card>
           </div>
@@ -475,7 +393,7 @@ export default function Portfolio() {
             <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
             {/* MathStack AI */}
             <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group bg-card">
               <CardContent className="p-8">
@@ -574,6 +492,49 @@ export default function Portfolio() {
                 </div>
               </CardContent>
             </Card>
+          </div>
+
+          {/* My Toolkit Section */}
+          <div className="mb-8">
+            <h3 className="text-2xl font-bold mb-8 text-center transition-colors duration-500 text-foreground">My Toolkit</h3>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+              <div className="flex flex-col items-center group">
+                <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                  <img src="/figma-logo.png" alt="Figma" className="w-8 h-8" />
+                </div>
+                <span className="text-sm text-muted-foreground">Figma</span>
+              </div>
+              <div className="flex flex-col items-center group">
+                <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                  <img src="/notion-logo.png" alt="Notion" className="w-8 h-8" />
+                </div>
+                <span className="text-sm text-muted-foreground">Notion</span>
+              </div>
+              <div className="flex flex-col items-center group">
+                <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                  <img src="/supabase-logo.png" alt="Supabase" className="w-8 h-8" />
+                </div>
+                <span className="text-sm text-muted-foreground">Supabase</span>
+              </div>
+              <div className="flex flex-col items-center group">
+                <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                  <img src="/gemini-ai-logo.jpg" alt="Gemini" className="w-8 h-8" />
+                </div>
+                <span className="text-sm text-muted-foreground">Gemini</span>
+              </div>
+              <div className="flex flex-col items-center group">
+                <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                  <img src="/openai-logo-inspired-abstract.png" alt="OpenAI" className="w-8 h-8" />
+                </div>
+                <span className="text-sm text-muted-foreground">OpenAI</span>
+              </div>
+              <div className="flex flex-col items-center group">
+                <div className="w-16 h-16 mb-2 rounded-lg bg-card shadow-md flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                  <img src="/jira-logo.png" alt="Jira" className="w-8 h-8" />
+                </div>
+                <span className="text-sm text-muted-foreground">Jira</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -854,38 +815,63 @@ export default function Portfolio() {
         id="contact"
         className="py-24 relative overflow-hidden opacity-0 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20"
       >
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-4xl font-bold text-foreground mb-4">Get in Touch</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto mb-8 rounded-full"></div>
-          <p className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-            Ready to collaborate on your next product challenge? Let's connect and explore how we can create exceptional
-            user experiences together.
-          </p>
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 relative z-10">
+          {/* Chat bubble */}
+          <div className="flex justify-end mb-6">
+            <div className="bg-primary text-white px-6 py-4 rounded-2xl rounded-br-sm max-w-md shadow-lg">
+              <p className="text-lg font-medium">Ready to build something great together?</p>
+            </div>
+          </div>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Button
-              className="bg-primary hover:bg-primary/90 text-white px-10 py-4 text-lg font-medium flex items-center gap-3 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-              onClick={() => window.open("mailto:ajay@example.com", "_blank")}
-            >
-              <Mail size={20} />
-              Email Me
-            </Button>
-            <Button
-              variant="outline"
-              className="border-border text-foreground hover:bg-muted hover:border-primary px-10 py-4 text-lg font-medium flex items-center gap-3 bg-transparent transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-              onClick={() => window.open("https://linkedin.com/in/ajaynichani", "_blank")}
-            >
-              <Linkedin size={20} />
-              LinkedIn
-            </Button>
-            <Button
-              variant="outline"
-              className="border-border text-foreground hover:bg-muted hover:border-primary px-10 py-4 text-lg font-medium flex items-center gap-3 bg-transparent transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-              onClick={() => window.open("https://x.com/aHj_builds", "_blank")}
-            >
-              <X size={20} />
-              Twitter
-            </Button>
+          {/* Chat input form */}
+          <div className="mb-12">
+            <div className="bg-white dark:bg-card rounded-2xl shadow-xl border border-border p-4 flex items-center gap-4">
+              <input
+                type="text"
+                placeholder="Let's connect..."
+                className="flex-1 bg-transparent border-none outline-none text-lg placeholder:text-muted-foreground text-foreground"
+                readOnly
+              />
+              <Button
+                size="sm"
+                className="bg-primary hover:bg-primary/90 text-white rounded-full p-3 shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                <Send size={18} />
+              </Button>
+            </div>
+          </div>
+
+          {/* Contact cards grid */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Email Card */}
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 bg-white dark:bg-card">
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 mb-4 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
+                  <Mail className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-foreground">Email Me</h3>
+                <p className="text-muted-foreground mb-6">ajay@example.com</p>
+                <Button
+                  className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-all duration-300"
+                  onClick={() => window.open("mailto:ajay@example.com", "_blank")}
+                >
+                  Send Email
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Twitter Card - Using TweetCard */}
+            <div className="flex flex-col h-full">
+              <TweetCard />
+              <Button
+                variant="outline"
+                className="mt-4 border-accent text-accent hover:bg-accent hover:text-white px-6 py-2 rounded-lg transition-all duration-300"
+                onClick={() => window.open("https://x.com/aHj_builds", "_blank")}
+              >
+                <XLogo className="mr-2 h-5 w-5" />
+                Follow Me
+              </Button>
+            </div>
           </div>
         </div>
       </section>
